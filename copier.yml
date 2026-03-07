@@ -65,6 +65,6 @@ ci_provider:
   type: str
   help: Which CI/CD provider do you want to use?
   choices:
-    GitHub: github
-    GitLab: gitlab
+    - github
+    - gitlab
   default: github
