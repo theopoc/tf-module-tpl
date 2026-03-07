@@ -31,11 +31,6 @@ terraform_min_version:
   default: "1.9"
   help: Minimum Terraform version required
 
-null_provider_version:
-  type: str
-  default: "~> 3.0"
-  help: Null provider version constraint
-
 author_name:
   type: str
   help: Author name
