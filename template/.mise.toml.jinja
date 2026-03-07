@@ -1,0 +1,25 @@
+[tools]
+node = "lts"
+terraform = "{{ terraform_min_version }}"
+tflint = "latest"
+terraform-docs = "latest"
+pre-commit = "latest"
+
+[tasks.validate]
+description = "Validate Terraform configuration"
+run = "terraform fmt -check -recursive && terraform validate && tflint"
+
+[tasks.format]
+description = "Format Terraform files"
+run = "terraform fmt -recursive"
+
+[tasks.docs]
+description = "Generate Terraform documentation"
+run = "terraform-docs markdown table --output-file=README.md --output-mode=inject ."
+
+[tasks.lint]
+description = "Lint all files with pre-commit"
+run = "pre-commit run -a"
+
+[env]
+_.file = ".env.example"
