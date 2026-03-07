@@ -1,0 +1,10 @@
+variable "name" {
+  description = "Name to identify resources created by this module."
+  type        = string
+}
+
+variable "tags" {
+  description = "Map of tags to apply to all resources."
+  type        = map(string)
+  default     = {}
+}

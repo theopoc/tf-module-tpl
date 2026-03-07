@@ -1,0 +1,50 @@
+_subdirectory: template
+_templates_suffix: .jinja
+_answers_file: .copier-answers.yml
+_tasks:
+  - bash update_hook_versions.sh
+  - git init --initial-branch=main
+  - pre-commit install
+
+module_name:
+  type: str
+  help: Module name (e.g., terraform-aws-mymodule)
+
+module_description:
+  type: str
+  help: Short description of the module
+
+terraform_min_version:
+  type: str
+  default: "1.9"
+  help: Minimum Terraform version required
+
+null_provider_version:
+  type: str
+  default: "~> 3.0"
+  help: Null provider version constraint
+
+author_name:
+  type: str
+  help: Author name
+
+github_repo:
+  type: str
+  help: GitHub repository (e.g., myorg/terraform-aws-mymodule)
+
+use_aws_provider:
+  type: bool
+  default: false
+  help: Do you want to add the AWS provider?
+
+aws_provider_version:
+  type: str
+  default: "~> 5.0"
+  help: AWS provider version constraint
+  when: "{{ use_aws_provider }}"
+
+aws_region:
+  type: str
+  default: "eu-west-1"
+  help: Default AWS region
+  when: "{{ use_aws_provider }}"

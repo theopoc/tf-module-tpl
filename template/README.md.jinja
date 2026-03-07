@@ -1,0 +1,33 @@
+# {{ module_name }}
+
+{{ module_description }}
+
+## Usage
+
+```hcl
+module "{{ module_name | replace('-', '_') }}" {
+  source  = "{{ github_repo }}"
+  version = "~> 1.0"
+
+  name = "example"
+  tags = {
+    Environment = "dev"
+    Terraform   = "true"
+  }
+}
+```
+
+## Examples
+
+- [Complete example](examples/complete)
+
+<!-- BEGIN_TF_DOCS -->
+<!-- END_TF_DOCS -->
+
+## Authors
+
+Module is maintained by {{ author_name }}.
+
+## License
+
+Apache-2.0 Licensed. See [LICENSE](LICENSE).

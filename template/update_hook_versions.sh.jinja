@@ -1,0 +1,51 @@
+#!/bin/bash
+# Update pre-commit hook versions from GitHub API
+
+set -e
+
+echo "Fetching latest hook versions..."
+
+CONFIG_FILE=".pre-commit-config.yaml"
+TEMP_FILE="${CONFIG_FILE}.tmp"
+
+# Helper function to fetch latest release
+fetch_latest_version() {
+  local owner=$1
+  local repo=$2
+  curl -s "https://api.github.com/repos/${owner}/${repo}/releases/latest" | \
+    grep -o '"tag_name": "[^"]*"' | head -1 | cut -d'"' -f4
+}
+
+# Fetch versions for each repo
+declare -A repos=(
+  ["https://github.com/antonbabenko/pre-commit-terraform"]="antonbabenko:pre-commit-terraform"
+  ["https://github.com/pre-commit/pre-commit-hooks"]="pre-commit:pre-commit-hooks"
+)
+
+# Process config file
+cp "$CONFIG_FILE" "$TEMP_FILE"
+
+for repo_url in "${!repos[@]}"; do
+  owner_repo="${repos[$repo_url]}"
+  owner="${owner_repo%%:*}"
+  repo="${owner_repo##*:}"
+
+  version=$(fetch_latest_version "$owner" "$repo")
+
+  if [ -n "$version" ]; then
+    # Use awk to find repo section and replace the next "rev:" line
+    awk -v repo_url="$repo_url" -v version="$version" '
+      BEGIN { found = 0 }
+      $0 ~ repo_url { found = 1; print; next }
+      found && /^    rev:$/ { print "    rev: " version; found = 0; next }
+      { print }
+    ' "$TEMP_FILE" > "${TEMP_FILE}.new" && mv "${TEMP_FILE}.new" "$TEMP_FILE"
+
+    echo "Updated $owner/$repo to $version"
+  else
+    echo "Warning: Could not fetch version for $owner/$repo"
+  fi
+done
+
+# Replace original file
+mv "$TEMP_FILE" "$CONFIG_FILE"
