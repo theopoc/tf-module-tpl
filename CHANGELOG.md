@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/theopoc/tf-module-tpl/compare/v1.2.0...v1.2.1) (2026-03-07)
+
+
+### Bug Fixes
+
+* commit dirty copier.yml changes ([389838e](https://github.com/theopoc/tf-module-tpl/commit/389838ea22cb1a6d1728c6d5c658220d8dd37a10))
+
 # [1.2.0](https://github.com/theopoc/tf-module-tpl/compare/v1.1.0...v1.2.0) (2026-03-07)
 
 
