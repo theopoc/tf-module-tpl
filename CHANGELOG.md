@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/theopoc/tf-module-tpl/compare/v1.0.0...v1.1.0) (2026-03-07)
+
+
+### Features
+
+* add tflint HCL configuration template ([7674b06](https://github.com/theopoc/tf-module-tpl/commit/7674b06a0ea3b577d76f2e437f855b8e35c9b620))
+
+
+### Performance Improvements
+
+* optimize GitHub Actions workflows with npm caching and semantic-release deps ([e0febca](https://github.com/theopoc/tf-module-tpl/commit/e0febcad1971eafc04fe6f47bcf4887add1bae21))
+
 # 1.0.0 (2026-03-07)
 
 
