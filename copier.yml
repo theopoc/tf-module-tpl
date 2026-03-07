@@ -2,11 +2,13 @@ _subdirectory: template
 _templates_suffix: .jinja
 _answers_file: .copier-answers.yml
 _tasks:
-  - git init --initial-branch=main
-  - git add .
-  - git commit -m "initial: terraform module scaffold"
-  - pre-commit autoupdate
-  - pre-commit install
+  - command: git init --initial-branch=main
+  - command: git config user.email "dev@local"
+  - command: git config user.name "Developer"
+  - command: git add .
+  - command: git commit -m "initial: terraform module scaffold"
+  - command: pre-commit autoupdate
+  - command: pre-commit install
 
 module_name:
   type: str
