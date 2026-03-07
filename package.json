@@ -1,0 +1,34 @@
+{
+  "name": "tf-module-tpl",
+  "version": "0.0.0",
+  "description": "Copier template for production-ready Terraform modules",
+  "author": "Theo",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theoludwig/tf-module-tpl.git"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/github": "^9.2.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/release-notes-generator": "^12.1.0",
+    "semantic-release": "^23.0.2"
+  },
+  "release": {
+    "branches": ["main"],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      ["@semantic-release/github", {
+        "labels": {
+          "enhancement": "enhancement",
+          "bug": "bug"
+        }
+      }],
+      "@semantic-release/git"
+    ]
+  }
+}
