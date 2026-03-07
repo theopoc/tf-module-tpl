@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/theopoc/tf-module-tpl/compare/v1.1.0...v1.2.0) (2026-03-07)
+
+
+### Bug Fixes
+
+* correct ci_provider choices format for Copier ([996c4ce](https://github.com/theopoc/tf-module-tpl/commit/996c4ce0a1b1866673de9b57d0c0d37c969b4fe9))
+
+
+### Features
+
+* add conditional CI/CD provider support (GitHub/GitLab) ([553f0b3](https://github.com/theopoc/tf-module-tpl/commit/553f0b3443b51c91de7b5540945c8089c6294115))
+
 # [1.1.0](https://github.com/theopoc/tf-module-tpl/compare/v1.0.0...v1.1.0) (2026-03-07)
 
 
