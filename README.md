@@ -70,19 +70,6 @@ copier copy https://github.com/theopoc/tf-module-tpl my-terraform-module
 cd my-terraform-module
 ```
 
-Copier will prompt you for the following information:
-
-- **Module name** (e.g., `terraform-aws-mymodule`)
-- **Module description** - Short description of your module
-- **Terraform minimum version** (default: `1.9`)
-- **Null provider version** (default: `~> 3.0`)
-- **Author name** - Your name
-- **GitHub repository** (e.g., `myorg/terraform-aws-mymodule`)
-- **Use AWS provider?** - Whether to include AWS provider (yes/no)
-  - If yes, you'll be prompted for:
-    - AWS provider version (default: `~> 5.0`)
-    - Default AWS region (default: `eu-west-1`)
-
 ### Example Usage
 
 ```bash
