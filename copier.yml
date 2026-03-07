@@ -64,12 +64,6 @@ aws_provider_version:
   help: AWS provider version constraint
   when: "{{ use_aws_provider }}"
 
-aws_region:
-  type: str
-  default: "eu-west-1"
-  help: Default AWS region
-  when: "{{ use_aws_provider }}"
-
 use_awscc_provider:
   type: bool
   default: false
