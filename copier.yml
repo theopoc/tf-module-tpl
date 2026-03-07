@@ -2,8 +2,8 @@ _subdirectory: template
 _templates_suffix: .jinja
 _answers_file: .copier-answers.yml
 _tasks:
-  - bash update_hook_versions.sh
   - git init --initial-branch=main
+  - pre-commit autoupdate
   - pre-commit install
 
 module_name:
