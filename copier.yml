@@ -44,6 +44,14 @@ use_aws_provider:
   default: false
   help: Do you want to add the AWS provider?
 
+ci_provider:
+  type: str
+  help: Which CI/CD provider do you want to use?
+  choices:
+    - "github"
+    - "gitlab"
+  default: "github"
+
 aws_provider_version:
   type: str
   default: "~> 5.0"
@@ -55,11 +63,3 @@ aws_region:
   default: "eu-west-1"
   help: Default AWS region
   when: "{{ use_aws_provider }}"
-
-ci_provider:
-  type: str
-  help: Which CI/CD provider do you want to use?
-  choices:
-    - github
-    - gitlab
-  default: github
