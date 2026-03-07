@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/theopoc/tf-module-tpl/compare/v1.2.2...v1.3.0) (2026-03-07)
+
+
+### Features
+
+* add conditional repository source in README and gitlab_repo question ([1c191af](https://github.com/theopoc/tf-module-tpl/commit/1c191af8e585b786480d3fe66ec8fa8da19e8c63))
+
 ## [1.2.2](https://github.com/theopoc/tf-module-tpl/compare/v1.2.1...v1.2.2) (2026-03-07)
 
 
