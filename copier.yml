@@ -5,6 +5,7 @@ _env:
   MISE_TRUSTED_CONFIG_PATHS: "."
 _tasks:
   - ["git", "init", "--initial-branch=main"]
+  - ["mise", "trust"]
   - ["mise", "install"]
   - ["terraform-docs", "markdown", "table", "--output-file=README.md", "--output-mode=inject", "."]
   - ["git", "add", "."]
