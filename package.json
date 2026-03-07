@@ -16,19 +16,4 @@
     "@semantic-release/release-notes-generator": "^12.1.0",
     "semantic-release": "^23.0.2"
   },
-  "release": {
-    "branches": ["main"],
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
-      ["@semantic-release/github", {
-        "labels": {
-          "enhancement": "enhancement",
-          "bug": "bug"
-        }
-      }],
-      "@semantic-release/git"
-    ]
-  }
 }
