@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/theoludwig/tf-module-tpl.git"
+    "url": "https://github.com/theopoc/tf-module-tpl.git"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
