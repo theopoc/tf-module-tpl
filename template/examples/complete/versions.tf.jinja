@@ -12,7 +12,7 @@ terraform {
       version = "{{ aws_provider_version }}"
     }
     {%- endif %}
-    {%- if use_awscc_provider %}
+    {%- if use_awscc_provider in ['yes', 'true', True] %}
     awscc = {
       source  = "hashicorp/awscc"
       version = "{{ awscc_provider_version }}"
