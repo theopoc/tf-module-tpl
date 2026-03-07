@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/theopoc/tf-module-tpl/compare/v1.2.1...v1.2.2) (2026-03-07)
+
+
+### Bug Fixes
+
+* update example versions.tf to use fixed null provider version ([5b17050](https://github.com/theopoc/tf-module-tpl/commit/5b170502156dcc2ff874d238d8e10f38cd0e95cb))
+
 ## [1.2.1](https://github.com/theopoc/tf-module-tpl/compare/v1.2.0...v1.2.1) (2026-03-07)
 
 
