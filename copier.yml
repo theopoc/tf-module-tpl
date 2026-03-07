@@ -69,3 +69,14 @@ aws_region:
   default: "eu-west-1"
   help: Default AWS region
   when: "{{ use_aws_provider }}"
+
+use_awscc_provider:
+  type: bool
+  default: false
+  help: Do you want to add the AWS Cloud Control provider?
+
+awscc_provider_version:
+  type: str
+  default: "~> 0.0"
+  help: AWS Cloud Control provider version constraint
+  when: "{{ use_awscc_provider }}"
