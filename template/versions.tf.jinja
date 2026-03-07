@@ -14,9 +14,3 @@ terraform {
     {%- endif %}
   }
 }
-{%- if use_aws_provider in ['yes', 'true', True] %}
-
-provider "aws" {
-  region = "{{ aws_region }}"
-}
-{%- endif %}
