@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/theopoc/tf-module-tpl/compare/v1.3.0...v1.4.0) (2026-03-07)
+
+
+### Bug Fixes
+
+* remove redundant aws_region configuration ([98c2d69](https://github.com/theopoc/tf-module-tpl/commit/98c2d693837cb671e107e5e05e607bb73d8fecd4))
+
+
+### Features
+
+* add conditional AWSCC provider support ([01abcd0](https://github.com/theopoc/tf-module-tpl/commit/01abcd015a690406d56492773086fdf13bd21081))
+
 # [1.3.0](https://github.com/theopoc/tf-module-tpl/compare/v1.2.2...v1.3.0) (2026-03-07)
 
 
