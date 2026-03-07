@@ -1,5 +1,10 @@
 # tf-module-tpl
 
+[![GitHub Release](https://img.shields.io/github/v/release/theopoc/tf-module-tpl?style=flat-square)](https://github.com/theopoc/tf-module-tpl/releases)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)](LICENSE)
+[![Release](https://img.shields.io/github/actions/workflow/status/theopoc/tf-module-tpl/release.yml?style=flat-square&label=release)](https://github.com/theopoc/tf-module-tpl/actions/workflows/release.yml)
+[![Copier](https://img.shields.io/badge/copier-template-blueviolet?style=flat-square)](https://copier.readthedocs.io/)
+
 A production-ready [Copier](https://copier.readthedocs.io/) template for scaffolding Terraform modules with best practices, pre-commit hooks, semantic versioning, and automated documentation generation.
 
 ## Features
