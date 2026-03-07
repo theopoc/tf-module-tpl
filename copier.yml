@@ -9,6 +9,7 @@ _tasks:
   - ["git", "commit", "-m", "initial: terraform module scaffold"]
   - ["pre-commit", "autoupdate"]
   - ["pre-commit", "install"]
+  - ["pre-commit", "run", "-a"]
 
 module_name:
   type: str
