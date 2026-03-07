@@ -35,13 +35,50 @@ A production-ready [Copier](https://copier.readthedocs.io/) template for scaffol
 
 ### Prerequisites
 
+- **Mise** - Polyglot tool version manager (required for template generation)
 - **Python 3.10+** - Required by Copier
 - **Git 2.27+** - For version control
 - **Copier** - Project template engine
 
-### Installation Methods
+### Install Mise
 
-Choose one of the following installation methods for Copier:
+Choose one of the following installation methods:
+
+#### macOS (Homebrew)
+
+```bash
+brew install mise
+```
+
+#### Linux (apt)
+
+```bash
+sudo apt update && sudo apt install -y curl
+sudo install -dm 755 /etc/apt/keyrings
+curl -fSs https://mise.jdx.dev/gpg-key.pub | sudo tee /etc/apt/keyrings/mise-archive-keyring.asc 1> /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.asc] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list
+sudo apt update && sudo apt install -y mise
+```
+
+#### Windows (winget/scoop/choco)
+
+```bash
+winget install jdx.mise
+# or
+scoop install mise
+# or
+choco install mise
+```
+
+#### Universal (curl)
+
+```bash
+curl https://mise.run | sh
+```
+
+### Install Copier
+
+Choose one of the following installation methods:
 
 #### Option 1: Using `pipx` (Recommended)
 

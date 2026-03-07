@@ -4,6 +4,7 @@ _answers_file: .copier-answers.yml
 _env:
   MISE_TRUSTED_CONFIG_PATHS: "."
 _tasks:
+  - ["mise", "--version"]
   - ["git", "init", "--initial-branch=main"]
   - ["mise", "trust", "-qa"]
   - ["mise", "install"]
