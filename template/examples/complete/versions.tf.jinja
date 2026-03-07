@@ -4,7 +4,7 @@ terraform {
   required_providers {
     null = {
       source  = "hashicorp/null"
-      version = "{{ null_provider_version }}"
+      version = "~> 3.0"
     }
     {%- if use_aws_provider in ['yes', 'true', True] %}
     aws = {
