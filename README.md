@@ -120,17 +120,6 @@ my-terraform-module/
 
 ## Features Explained
 
-### Pre-commit Hooks
-
-Automatically run on every commit:
-- `terraform fmt` - Format Terraform files
-- `terraform docs` - Generate documentation
-- `terraform validate` - Validate Terraform syntax
-- `terraform tflint` - Lint Terraform code
-- `check-merge-conflict` - Detect merge conflicts
-- `end-of-file-fixer` - Fix file endings
-- `trailing-whitespace` - Remove trailing whitespace
-
 ### Commit Message Validation
 
 Uses commitlint with conventional commits:
@@ -153,41 +142,6 @@ mise run format       # Format code
 mise run docs         # Generate documentation
 mise run lint         # Run linting
 ```
-
-### GitHub Actions
-
-**Lint Workflow** - Runs on every push and pull request:
-- Terraform fmt check
-- Terraform init
-- Terraform validate
-- tflint
-
-**Release Workflow** - Runs on push to main:
-- Analyzes conventional commits
-- Determines version bump
-- Creates GitHub release
-- Updates CHANGELOG.md
-- Pushes tags
-
-## Customization
-
-### Changing Tool Versions
-
-Edit `.mise.toml`:
-```toml
-[tools]
-terraform = "1.9"      # Change Terraform version
-tflint = "0.52"        # Change tflint version
-node = "20"            # Change Node.js version
-```
-
-### Modifying Pre-commit Hooks
-
-Edit `.pre-commit-config.yaml` to add/remove hooks.
-
-### Custom Release Configuration
-
-Edit `.releaserc.json` to customize semantic-release behavior.
 
 ## Development
 
@@ -225,40 +179,6 @@ To update your module template to the latest version:
 
 ```bash
 copier update
-```
-
-## Requirements for Generated Modules
-
-Generated modules require:
-- Terraform 1.9+ (or your configured minimum version)
-- Null provider 3.0+ (or your configured version)
-- AWS provider 5.0+ (if AWS provider is enabled)
-- Git for version control
-- Pre-commit framework (installed via npm)
-
-## Troubleshooting
-
-### Mise trust prompt
-
-If you see "Config files are not trusted", run:
-```bash
-mise trust
-```
-
-### Pre-commit hook failures
-
-Ensure all tools are installed:
-```bash
-mise install
-pre-commit install
-```
-
-### Terraform validation errors
-
-Check the Terraform syntax:
-```bash
-terraform fmt -recursive
-terraform validate
 ```
 
 ## License
