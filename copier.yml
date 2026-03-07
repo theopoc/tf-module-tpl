@@ -3,8 +3,6 @@ _templates_suffix: .jinja
 _answers_file: .copier-answers.yml
 _tasks:
   - ["git", "init", "--initial-branch=main"]
-  - ["git", "config", "user.email", "dev@local"]
-  - ["git", "config", "user.name", "Developer"]
   - ["terraform-docs", "markdown", "table", "--output-file=README.md", "--output-mode=inject", "."]
   - ["git", "add", "."]
   - ["git", "commit", "-m", "initial: terraform module scaffold"]
