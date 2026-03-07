@@ -60,3 +60,11 @@ aws_region:
   default: "eu-west-1"
   help: Default AWS region
   when: "{{ use_aws_provider }}"
+
+ci_provider:
+  type: str
+  help: Which CI/CD provider do you want to use?
+  choices:
+    GitHub: github
+    GitLab: gitlab
+  default: github
