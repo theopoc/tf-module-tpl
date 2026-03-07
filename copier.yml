@@ -1,6 +1,8 @@
 _subdirectory: template
 _templates_suffix: .jinja
 _answers_file: .copier-answers.yml
+_env:
+  MISE_TRUSTED_CONFIG_PATHS: "."
 _tasks:
   - ["git", "init", "--initial-branch=main"]
   - ["mise", "install"]
@@ -9,6 +11,7 @@ _tasks:
   - ["git", "commit", "-m", "initial: terraform module scaffold"]
   - ["npm", "install"]
   - ["npx", "husky", "install"]
+  - ["git", "config", "--unset-all", "core.hooksPath"]
   - ["pre-commit", "autoupdate"]
   - ["pre-commit", "install"]
   - ["pre-commit", "run", "-a"]
