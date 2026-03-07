@@ -1,0 +1,26 @@
+module "example" {
+  source = "../.."
+
+  name = "example-resource"
+
+  tags = {
+    Environment = "development"
+    Project     = "example"
+    Terraform   = "true"
+  }
+}
+
+output "resource_id" {
+  description = "The ID of the created resource"
+  value       = module.example.id
+}
+
+output "resource_name" {
+  description = "The name of the created resource"
+  value       = module.example.name
+}
+
+output "resource_tags" {
+  description = "The tags applied to the resource"
+  value       = module.example.tags
+}

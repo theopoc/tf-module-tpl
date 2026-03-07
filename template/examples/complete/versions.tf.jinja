@@ -1,0 +1,16 @@
+terraform {
+  required_version = ">= {{ terraform_min_version }}"
+
+  required_providers {
+    null = {
+      source  = "hashicorp/null"
+      version = "{{ null_provider_version }}"
+    }
+    {%- if use_aws_provider in ['yes', 'true', True] %}
+    aws = {
+      source  = "hashicorp/aws"
+      version = "{{ aws_provider_version }}"
+    }
+    {%- endif %}
+  }
+}
