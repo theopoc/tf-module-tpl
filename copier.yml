@@ -10,8 +10,6 @@ _tasks:
   - ["mise", "install"]
   - ["terraform-docs", "markdown", "table", "--output-file=README.md", "--output-mode=inject", "."]
   - ["npm", "install"]
-  - ["npx", "husky", "install"]
-  - ["git", "config", "--unset-all", "core.hooksPath"]
   - ["git", "add", "."]
   - ["git", "commit", "-m", "initial: terraform module scaffold"]
   - ["pre-commit", "autoupdate"]
