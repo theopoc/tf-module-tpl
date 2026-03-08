@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/theopoc/tf-module-tpl/compare/v1.4.0...v1.4.1) (2026-03-08)
+
+
+### Bug Fixes
+
+* trailing whitespace on README ([60aaf31](https://github.com/theopoc/tf-module-tpl/commit/60aaf3137e22eb9ce5e51feb049bc0a3fe912cca))
+
 # [1.4.0](https://github.com/theopoc/tf-module-tpl/compare/v1.3.0...v1.4.0) (2026-03-07)
 
 
