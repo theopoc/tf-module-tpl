@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "description": "Disable all npm non-security updates",
+      "matchManagers": ["npm"],
+      "enabled": false
+    },
+    {
+      "description": "Automerge mise tool updates when CI passes",
+      "matchManagers": ["custom.regex"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["template/\\.mise\\.toml\\.jinja$"],
+      "matchStrings": ["tflint = \"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "terraform-linters/tflint",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["template/\\.mise\\.toml\\.jinja$"],
+      "matchStrings": ["terraform-docs = \"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "terraform-docs/terraform-docs",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["template/\\.mise\\.toml\\.jinja$"],
+      "matchStrings": ["pre-commit = \"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "pre-commit",
+      "datasourceTemplate": "pypi",
+      "versioningTemplate": "semver"
+    }
+  ]
+}
