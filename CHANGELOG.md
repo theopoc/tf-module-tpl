@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/theopoc/tf-module-tpl/compare/v1.4.1...v1.4.2) (2026-03-08)
+
+
+### Bug Fixes
+
+* end of file ([e048170](https://github.com/theopoc/tf-module-tpl/commit/e04817022410d613c8ab0665234d2a7d42c92ddc))
+
 ## [1.4.1](https://github.com/theopoc/tf-module-tpl/compare/v1.4.0...v1.4.1) (2026-03-08)
 
 
