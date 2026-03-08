@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/theopoc/tf-module-tpl/compare/v1.4.2...v1.5.0) (2026-03-08)
+
+
+### Features
+
+* enable Renovate automerge with CI validation ([dfecb05](https://github.com/theopoc/tf-module-tpl/commit/dfecb05f8bc7fc00ce85b963ba8010a65a25933c))
+
 ## [1.4.2](https://github.com/theopoc/tf-module-tpl/compare/v1.4.1...v1.4.2) (2026-03-08)
 
 
