@@ -19,6 +19,13 @@
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeStrategy": "squash"
+    },
+    {
+      "description": "Automerge GitHub Actions minor and patch updates when CI passes",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeStrategy": "squash"
     }
   ],
   "customManagers": [
