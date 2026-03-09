@@ -28,6 +28,13 @@
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeStrategy": "squash"
+    },
+    {
+      "description": "Automerge uv dependency minor and patch updates when CI passes",
+      "matchManagers": ["uv"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeStrategy": "squash"
     }
   ],
   "customManagers": [
