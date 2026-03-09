@@ -1,3 +1,12 @@
+# [1.8.0](https://github.com/theopoc/tf-module-tpl/compare/v1.7.2...v1.8.0) (2026-03-09)
+
+
+### Features
+
+* add .terraform-docs.yaml config file to template ([82f1e0a](https://github.com/theopoc/tf-module-tpl/commit/82f1e0a00339f7fc4a4dc7912154f647a7fe3611))
+* conditionally generate .terraform-docs.yaml based on use_terraform_docs ([58e5831](https://github.com/theopoc/tf-module-tpl/commit/58e583167855a111651b0b1593ce28ddf330bc16))
+* enrich terraform-docs config with sort and settings ([e7ba019](https://github.com/theopoc/tf-module-tpl/commit/e7ba019e177e067a06345b0fb2d9260809e4cfb0))
+
 ## [1.7.2](https://github.com/theopoc/tf-module-tpl/compare/v1.7.1...v1.7.2) (2026-03-09)
 
 
