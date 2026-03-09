@@ -9,7 +9,7 @@ _tasks:
   - ["git", "init", "--initial-branch=main"]
   - ["mise", "trust", "-qa"]
   - ["mise", "install"]
-  - command: ["terraform-docs", "markdown", "table", "--output-file=README.md", "--output-mode=inject", "."]
+  - command: ["terraform-docs", "."]
     when: "{{ use_terraform_docs }}"
   - command: ["npm", "install"]
     when: "{{ use_semantic_release }}"

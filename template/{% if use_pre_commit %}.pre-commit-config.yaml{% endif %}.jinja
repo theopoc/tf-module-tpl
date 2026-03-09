@@ -12,8 +12,6 @@ repos:
       - id: terraform_fmt
 {%- if use_terraform_docs %}
       - id: terraform_docs
-        args:
-          - '--args=--lockfile=false'
 {%- endif %}
 {%- if use_tflint %}
       - id: terraform_tflint
