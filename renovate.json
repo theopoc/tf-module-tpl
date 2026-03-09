@@ -52,6 +52,30 @@
       "depNameTemplate": "pre-commit",
       "datasourceTemplate": "pypi",
       "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^copier\\.yml$"],
+      "matchStrings": ["terraform_min_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "terraform",
+      "datasourceTemplate": "hashicorp",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^copier\\.yml$"],
+      "matchStrings": ["aws_provider_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "hashicorp/aws",
+      "datasourceTemplate": "terraform-provider",
+      "versioningTemplate": "hashicorp"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^copier\\.yml$"],
+      "matchStrings": ["awscc_provider_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "hashicorp/awscc",
+      "datasourceTemplate": "terraform-provider",
+      "versioningTemplate": "hashicorp"
     }
   ]
 }
