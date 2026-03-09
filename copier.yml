@@ -69,6 +69,6 @@ use_awscc_provider:
 
 awscc_provider_version:
   type: str
-  default: "~> 0.0"
+  default: "~> 1"
   help: AWS Cloud Control provider version constraint
   when: "{{ use_awscc_provider }}"
