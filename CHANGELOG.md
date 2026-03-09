@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/theopoc/tf-module-tpl/compare/v1.7.1...v1.7.2) (2026-03-09)
+
+
+### Bug Fixes
+
+* move enable_pipeline before ci_provider and add when condition ([e418060](https://github.com/theopoc/tf-module-tpl/commit/e41806010e77c0b2f5d0c9c38c5a20ea0e55f666))
+
 ## [1.7.1](https://github.com/theopoc/tf-module-tpl/compare/v1.7.0...v1.7.1) (2026-03-09)
 
 
