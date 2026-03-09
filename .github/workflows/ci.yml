@@ -3,12 +3,18 @@ name: CI
 on:
   push:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   render-test:
     name: Render Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
       - uses: jdx/mise-action@v3
         with:
           install: false
@@ -16,6 +22,7 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
+          cache-python: true
       - name: Install dependencies
         run: uv sync --frozen
       - name: Configure git
