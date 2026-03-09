@@ -20,14 +20,15 @@ module "{{ module_name | replace('-', '_') }}" {
   }
 }
 ```
-
+{% if use_examples %}
 ## Examples
 
 - [Complete example](examples/complete)
-
+{% endif %}
+{%- if use_terraform_docs %}
 <!-- BEGIN_TF_DOCS -->
 <!-- END_TF_DOCS -->
-
+{% endif %}
 ## Authors
 
 Module is maintained by {{ author_name }}.
