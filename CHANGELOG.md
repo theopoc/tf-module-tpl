@@ -1,3 +1,11 @@
+## [1.7.1](https://github.com/theopoc/tf-module-tpl/compare/v1.7.0...v1.7.1) (2026-03-09)
+
+
+### Bug Fixes
+
+* strip trailing newline in gitlab-ci.yml template ([0d4022e](https://github.com/theopoc/tf-module-tpl/commit/0d4022e890d4243861f658b3520cdc213cd7e9c8))
+* strip trailing newline in lint.yml template ([b56af65](https://github.com/theopoc/tf-module-tpl/commit/b56af657888073cde3191c63dd3d1a90bca4cf2e))
+
 # [1.7.0](https://github.com/theopoc/tf-module-tpl/compare/v1.6.0...v1.7.0) (2026-03-09)
 
 
