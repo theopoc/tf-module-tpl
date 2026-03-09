@@ -5,24 +5,16 @@ _env:
   MISE_TRUSTED_CONFIG_PATHS: "."
 _tasks:
   - ["mise", "--version"]
-  - command: ["git", "init", "--initial-branch=main"]
-    when: "{{ not _ci }}"
+  - ["git", "init", "--initial-branch=main"]
   - ["mise", "trust", "-qa"]
   - ["mise", "install"]
   - ["terraform-docs", "markdown", "table", "--output-file=README.md", "--output-mode=inject", "."]
   - ["npm", "install"]
-  - command: ["git", "add", "."]
-    when: "{{ not _ci }}"
-  - command: ["git", "commit", "-m", "initial: terraform module scaffold"]
-    when: "{{ not _ci }}"
+  - ["git", "add", "."]
+  - ["git", "commit", "-m", "initial: terraform module scaffold"]
   - ["pre-commit", "autoupdate"]
   - ["pre-commit", "install"]
   - ["pre-commit", "run", "-a"]
-
-_ci:
-  type: bool
-  default: false
-  when: false
 
 module_name:
   type: str

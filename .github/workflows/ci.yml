@@ -17,6 +17,10 @@ jobs:
           python-version: "3.x"
       - name: Install copier
         run: pip install copier
+      - name: Configure git
+        run: |
+          git config --global user.email "ci@example.com"
+          git config --global user.name "CI"
       - name: Render template with tasks
         run: |
           copier copy . /tmp/rendered \
@@ -26,8 +30,7 @@ jobs:
             --data module_description="Example module" \
             --data author_name="Test Author" \
             --data ci_provider=github \
-            --data github_repo=myorg/terraform-aws-example \
-            --data _ci=true
+            --data github_repo=myorg/terraform-aws-example
 
   validate:
     name: Validate
