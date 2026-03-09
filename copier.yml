@@ -38,6 +38,11 @@ author_name:
   type: str
   help: Author name
 
+enable_pipeline:
+  type: bool
+  default: true
+  help: Enable CI/CD pipeline configuration
+
 ci_provider:
   type: str
   help: Which CI/CD provider do you want to use?
@@ -45,6 +50,7 @@ ci_provider:
     - "github"
     - "gitlab"
   default: "github"
+  when: "{{ enable_pipeline }}"
 
 github_repo:
   type: str
@@ -92,11 +98,6 @@ use_semantic_release:
   type: bool
   default: true
   help: Enable semantic-release for automated versioning and changelog
-
-enable_pipeline:
-  type: bool
-  default: true
-  help: Enable CI/CD pipeline configuration
 
 use_examples:
   type: bool
