@@ -5,16 +5,24 @@ _env:
   MISE_TRUSTED_CONFIG_PATHS: "."
 _tasks:
   - ["mise", "--version"]
-  - ["git", "init", "--initial-branch=main"]
+  - command: ["git", "init", "--initial-branch=main"]
+    when: "{{ not _ci }}"
   - ["mise", "trust", "-qa"]
   - ["mise", "install"]
   - ["terraform-docs", "markdown", "table", "--output-file=README.md", "--output-mode=inject", "."]
   - ["npm", "install"]
-  - ["git", "add", "."]
-  - ["git", "commit", "-m", "initial: terraform module scaffold"]
+  - command: ["git", "add", "."]
+    when: "{{ not _ci }}"
+  - command: ["git", "commit", "-m", "initial: terraform module scaffold"]
+    when: "{{ not _ci }}"
   - ["pre-commit", "autoupdate"]
   - ["pre-commit", "install"]
   - ["pre-commit", "run", "-a"]
+
+_ci:
+  type: bool
+  default: false
+  when: false
 
 module_name:
   type: str
@@ -69,6 +77,6 @@ use_awscc_provider:
 
 awscc_provider_version:
   type: str
-  default: "~> 0.0"
+  default: "~> 1"
   help: AWS Cloud Control provider version constraint
   when: "{{ use_awscc_provider }}"
