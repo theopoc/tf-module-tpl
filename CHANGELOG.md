@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/theopoc/tf-module-tpl/compare/v1.6.0...v1.7.0) (2026-03-09)
+
+
+### Features
+
+* update gitignore ([37660cd](https://github.com/theopoc/tf-module-tpl/commit/37660cd1c289592ed6e93a8286bb34938fd3aba3))
+
 # [1.6.0](https://github.com/theopoc/tf-module-tpl/compare/v1.5.0...v1.6.0) (2026-03-09)
 
 
