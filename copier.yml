@@ -8,13 +8,18 @@ _tasks:
   - ["git", "init", "--initial-branch=main"]
   - ["mise", "trust", "-qa"]
   - ["mise", "install"]
-  - ["terraform-docs", "markdown", "table", "--output-file=README.md", "--output-mode=inject", "."]
-  - ["npm", "install"]
+  - command: ["terraform-docs", "markdown", "table", "--output-file=README.md", "--output-mode=inject", "."]
+    when: "{{ use_terraform_docs }}"
+  - command: ["npm", "install"]
+    when: "{{ use_semantic_release }}"
   - ["git", "add", "."]
   - ["git", "commit", "-m", "initial: terraform module scaffold"]
-  - ["pre-commit", "autoupdate"]
-  - ["pre-commit", "install"]
-  - ["pre-commit", "run", "-a"]
+  - command: ["pre-commit", "autoupdate"]
+    when: "{{ use_pre_commit }}"
+  - command: ["pre-commit", "install"]
+    when: "{{ use_pre_commit }}"
+  - command: ["pre-commit", "run", "-a"]
+    when: "{{ use_pre_commit }}"
 
 module_name:
   type: str
@@ -72,3 +77,33 @@ awscc_provider_version:
   default: "~> 1"
   help: AWS Cloud Control provider version constraint
   when: "{{ use_awscc_provider }}"
+
+use_tflint:
+  type: bool
+  default: true
+  help: Enable TFLint for Terraform linting
+
+use_pre_commit:
+  type: bool
+  default: true
+  help: Enable pre-commit hooks for code quality
+
+use_semantic_release:
+  type: bool
+  default: true
+  help: Enable semantic-release for automated versioning and changelog
+
+enable_pipeline:
+  type: bool
+  default: true
+  help: Enable CI/CD pipeline configuration
+
+use_examples:
+  type: bool
+  default: true
+  help: Generate an examples/ directory with usage examples
+
+use_terraform_docs:
+  type: bool
+  default: true
+  help: Enable terraform-docs for automatic documentation generation
