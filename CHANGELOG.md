@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/theopoc/tf-module-tpl/compare/v1.5.0...v1.6.0) (2026-03-09)
+
+
+### Features
+
+* add render test job to CI pipeline ([c6bdf7a](https://github.com/theopoc/tf-module-tpl/commit/c6bdf7adbec941dcd995b82314bc7e328f1ed46f))
+
 # [1.5.0](https://github.com/theopoc/tf-module-tpl/compare/v1.4.2...v1.5.0) (2026-03-08)
 
 
