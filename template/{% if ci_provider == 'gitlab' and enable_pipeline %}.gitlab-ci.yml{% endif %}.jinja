@@ -84,8 +84,7 @@ tf-docs:
   stage: docs
   script:
     - mise exec -- terraform-docs --output-check .
-  needs:
-    - tf-validate
+  needs: []
 {%- endif %}
 {%- if use_semantic_release %}
 
