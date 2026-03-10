@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/theopoc/tf-module-tpl/compare/v1.10.4...v1.11.0) (2026-03-10)
+
+
+### Features
+
+* **template:** GitLab pipeline via to-be-continuous CI/CD component ([#14](https://github.com/theopoc/tf-module-tpl/issues/14)) ([f36731b](https://github.com/theopoc/tf-module-tpl/commit/f36731b04a62491e908212b11e942c0a6c0e908d))
+
 ## [1.10.4](https://github.com/theopoc/tf-module-tpl/compare/v1.10.3...v1.10.4) (2026-03-10)
 
 
