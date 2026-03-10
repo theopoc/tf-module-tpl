@@ -127,6 +127,7 @@ jobs:
         with:
           path: /tmp/rendered/.gitlab-ci-local/cache
           key: gcl-mise-${{ hashFiles('/tmp/rendered/.mise.toml') }}
+          restore-keys: gcl-mise-
 
       - name: Test generated .gitlab-ci.yml with gitlab-ci-local
         if: matrix.ci_provider == 'gitlab'

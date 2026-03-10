@@ -12,19 +12,20 @@ mise-install:
     name: ghcr.io/jdx/mise:latest
     entrypoint: [""]
   variables:
-    MISE_DATA_DIR: ${CI_PROJECT_DIR}/.mise-data
+    MISE_DATA_DIR: ${CI_PROJECT_DIR}/.mise/mise-data
   cache:
-    key:
-      files:
-        - .mise.toml
-    paths:
-      - .mise-data/installs
+    - key:
+        prefix: mise-
+        files:
+          - .mise.toml
+      paths:
+        - .mise/mise-data
   script:
     - mise install
     - mise ls
   artifacts:
     paths:
-      - .mise-data/installs
+      - .mise/mise-data/installs
 
 # --- Hidden job : base for all mise-managed tools ---
 
@@ -33,7 +34,7 @@ mise-install:
     name: ghcr.io/jdx/mise:latest
     entrypoint: [""]
   variables:
-    MISE_DATA_DIR: ${CI_PROJECT_DIR}/.mise-data
+    MISE_DATA_DIR: ${CI_PROJECT_DIR}/.mise/mise-data
   needs:
     - job: mise-install
       artifacts: true
