@@ -101,6 +101,7 @@ jobs:
         if: matrix.ci_provider == 'github'
         working-directory: /tmp/rendered
         run: |
+          git remote add origin https://github.com/myorg/terraform-aws-example.git
           act push \
             -W .github/workflows/lint.yml \
             -j lint \
