@@ -122,6 +122,10 @@ release:
     - npm ci
   script:
     - npx semantic-release
+  cache:
+    policy: pull-push
+    paths:
+      - node_modules/
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 {%- endif %}
