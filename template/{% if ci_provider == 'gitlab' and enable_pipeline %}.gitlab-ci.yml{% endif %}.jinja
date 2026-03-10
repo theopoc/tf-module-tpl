@@ -98,7 +98,7 @@ tf-docs:
     - curl -fsSL "https://github.com/terraform-docs/terraform-docs/releases/download/v${TERRAFORM_DOCS_VERSION}/terraform-docs-v${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz" -o tfdocs.tar.gz
     - tar -xzf tfdocs.tar.gz -C /usr/local/bin/ terraform-docs && rm tfdocs.tar.gz
   script:
-    - terraform-docs diff . --check
+    - terraform-docs diff . --output-check
   needs:
     - job: find-tools-versions
       artifacts: true
