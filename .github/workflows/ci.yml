@@ -2,6 +2,12 @@ name: CI
 
 on:
   push:
+    branches-ignore:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
+      - 'renovate.json'
   workflow_dispatch:
 
 concurrency:
@@ -11,7 +17,7 @@ concurrency:
 jobs:
   render-test:
     name: Render Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
         with:
@@ -36,6 +42,13 @@ jobs:
         with:
           working_directory: /tmp/mise-render
           cache: true
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('template/*package.json*.jinja', 'package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
       - name: Configure git
         run: |
           git config --global user.email "ci@example.com"
