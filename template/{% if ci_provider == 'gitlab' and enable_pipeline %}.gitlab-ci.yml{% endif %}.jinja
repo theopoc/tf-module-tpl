@@ -10,10 +10,14 @@ variables:
 
 lint:
   stage: lint
-  image: alpine:latest
+  image:
+    name: hashicorp/terraform:latest
+    entrypoint: [""]
+{%- if use_tflint %}
   before_script:
-    - apk add --no-cache terraform{% if use_tflint %} tflint{% endif %}
-
+    - apk add --no-cache curl
+    - curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | sh
+{%- endif %}
   script:
     - terraform fmt -check -recursive
     - terraform init -backend=false
