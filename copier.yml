@@ -68,27 +68,26 @@ gitlab_repo:
   when: "{{ enable_pipeline and ci_provider == 'gitlab' }}"
   validator: "{% if not value | trim %}GitLab repository cannot be empty.{% endif %}"
 
-use_aws_provider:
-  type: bool
-  default: false
-  help: Do you want to add the AWS provider?
+providers:
+  type: yaml
+  help: Which Terraform providers do you want to add?
+  multiselect: true
+  choices:
+    AWS: aws
+    "AWS Cloud Control": awscc
+  default: []
 
 aws_provider_version:
   type: str
   default: "~> 5.0"
   help: AWS provider version constraint
-  when: "{{ use_aws_provider }}"
-
-use_awscc_provider:
-  type: bool
-  default: false
-  help: Do you want to add the AWS Cloud Control provider?
+  when: "{{ 'aws' in providers }}"
 
 awscc_provider_version:
   type: str
   default: "~> 1"
   help: AWS Cloud Control provider version constraint
-  when: "{{ use_awscc_provider }}"
+  when: "{{ 'awscc' in providers }}"
 
 use_tflint:
   type: bool

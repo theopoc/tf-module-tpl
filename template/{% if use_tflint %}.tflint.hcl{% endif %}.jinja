@@ -6,7 +6,7 @@ plugin "terraform" {
   enabled = true
   preset  = "recommended"
 }
-{%- if use_aws_provider or use_awscc_provider %}
+{%- if providers %}
 
 plugin "aws" {
   enabled = true
