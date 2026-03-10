@@ -16,14 +16,26 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 1
-      - uses: jdx/mise-action@v3
-        with:
-          install: false
       - uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
       - name: Install dependencies
         run: uv sync --frozen
+      - name: Render template for mise cache
+        run: |
+          uv run copier copy . /tmp/mise-render \
+            --defaults \
+            --trust \
+            --skip-tasks \
+            --data module_name=terraform-aws-example \
+            --data module_description="Example module" \
+            --data author_name="Test Author" \
+            --data ci_provider=github \
+            --data github_repo=myorg/terraform-aws-example
+      - uses: jdx/mise-action@v3
+        with:
+          working_directory: /tmp/mise-render
+          cache: true
       - name: Configure git
         run: |
           git config --global user.email "ci@example.com"
