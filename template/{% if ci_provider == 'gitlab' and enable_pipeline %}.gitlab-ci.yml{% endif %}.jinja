@@ -3,17 +3,16 @@ include:
     inputs:
       image: hashicorp/terraform:latest
       gitlab-backend-disabled: true
-      trivy-image: docker.io/aquasec/trivy
-      docs-enabled: true
-      docs-image: quay.io/terraform-docs/terraform-docs:edge
       fmt-enabled: true
       validate-enabled: true
 {%- if not use_tflint %}
       tflint-disabled: true
 {%- endif %}
       trivy-disabled: false
+      trivy-image: docker.io/aquasec/trivy
 {%- if use_terraform_docs %}
       docs-enabled: true
+      docs-image: quay.io/terraform-docs/terraform-docs:edge
 {%- endif %}
 {% if use_semantic_release %}
 release:
