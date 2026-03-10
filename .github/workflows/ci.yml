@@ -91,4 +91,4 @@ jobs:
         working-directory: /tmp/rendered
         run: |
           npm install -g gitlab-ci-local
-          gitlab-ci-local --list
+          gitlab-ci-local lint --shell-isolation
