@@ -33,8 +33,9 @@ jobs:
 {% if use_tflint %}
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v4
-        tflint_version: "0.61.0"
-        cache: true
+        with:
+          tflint_version: "0.61.0"
+          cache: true
 
       - name: TFLint Init
         run: tflint --init
