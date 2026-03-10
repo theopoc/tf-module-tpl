@@ -12,11 +12,8 @@ include:
       docs-enabled: true
 {%- endif %}
 {% if use_semantic_release %}
-stages:
-  - release
-
 release:
-  stage: release
+  stage: .post
   image: node:lts
   before_script:
     - npm ci
