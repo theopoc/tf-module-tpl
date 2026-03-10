@@ -13,10 +13,10 @@ _tasks:
     when: "{{ use_terraform_docs }}"
   - command: ["npm", "install"]
     when: "{{ use_semantic_release }}"
-  - ["git", "add", "."]
-  - ["git", "commit", "-m", "initial: terraform module scaffold"]
   - command: ["pre-commit", "autoupdate"]
     when: "{{ use_pre_commit }}"
+  - ["git", "add", "."]
+  - ["git", "commit", "-m", "initial: terraform module scaffold"]
   - command: ["pre-commit", "install"]
     when: "{{ use_pre_commit }}"
   - command: ["pre-commit", "run", "-a"]
