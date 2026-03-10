@@ -1,3 +1,13 @@
+## [1.10.4](https://github.com/theopoc/tf-module-tpl/compare/v1.10.3...v1.10.4) (2026-03-10)
+
+
+### Bug Fixes
+
+* **ci:** include hidden files in rendered artifact ([a375891](https://github.com/theopoc/tf-module-tpl/commit/a3758911822aab962e23c02f84b93c43ace143cd))
+* **ci:** install act to /usr/local/bin so it is in PATH ([7396138](https://github.com/theopoc/tf-module-tpl/commit/7396138f65ecc7e7b7b816f68490729d8c002fef))
+* **ci:** run gitlab-ci lint job with shell-isolation instead of --list ([88b55ec](https://github.com/theopoc/tf-module-tpl/commit/88b55ec3e048df6b2ead5623c59742b97bc7dbe6))
+* use hashicorp/terraform image and fix tflint install in gitlab ci ([836ac41](https://github.com/theopoc/tf-module-tpl/commit/836ac4102f1c96054e481bdc59ecd597ea6c9e39))
+
 ## [1.10.3](https://github.com/theopoc/tf-module-tpl/compare/v1.10.2...v1.10.3) (2026-03-10)
 
 
