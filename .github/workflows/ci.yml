@@ -111,27 +111,23 @@ jobs:
         if: matrix.ci_provider == 'gitlab'
         run: npm install -g gitlab-ci-local
 
-      - name: List all jobs with gitlab-ci-local
+      - name: Cache npm dependencies
         if: matrix.ci_provider == 'gitlab'
-        working-directory: /tmp/rendered
-        run: gitlab-ci-local --list
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('template/*package.json*.jinja', 'package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
 
       - name: Preview with gitlab-ci-local
         if: matrix.ci_provider == 'gitlab'
         working-directory: /tmp/rendered
         run: gitlab-ci-local --preview
 
-      - name: Cache gitlab-ci-local mise installs
-        if: matrix.ci_provider == 'gitlab'
-        uses: actions/cache@v4
-        with:
-          path: /tmp/rendered/.gitlab-ci-local/cache
-          key: gcl-mise-${{ hashFiles('/tmp/rendered/.mise.toml') }}
-          restore-keys: gcl-mise-
-
       - name: Test generated .gitlab-ci.yml with gitlab-ci-local
         if: matrix.ci_provider == 'gitlab'
         working-directory: /tmp/rendered
-        run: gitlab-ci-local mise-install tf-fmt tflint trivy tf-validate tf-docs --shell-isolation
+        run: gitlab-ci-local mise-install tf-fmt tflint trivy tf-validate tf-docs --shell-isolation --pull-policy if-not-present --timestamps --quiet
         env:
           GCL_NEEDS: true
