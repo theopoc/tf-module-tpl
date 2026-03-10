@@ -30,6 +30,7 @@ module_name:
 module_description:
   type: str
   help: Short description of the module
+  default: "A Terraform module for {{ module_name }}"
   validator: "{% if not value | trim %}Module description cannot be empty.{% endif %}"
 
 terraform_min_version:
