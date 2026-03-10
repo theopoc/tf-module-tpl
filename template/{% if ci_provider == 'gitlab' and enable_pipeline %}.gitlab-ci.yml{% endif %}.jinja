@@ -26,18 +26,28 @@ stages:
     - .mise/installs
     - .mise/shims
 
-mise-install:
+parse-mise-versions:
   stage: .pre
-  image:
-    name: ghcr.io/jdx/mise:latest
-    entrypoint: [""]
-  variables:
-    MISE_DATA_DIR: $CI_PROJECT_DIR/.mise
-  cache:
-    - <<: *mise-cache
-      policy: push
+  image: alpine:latest
   script:
-    - mise install -q
+    - |
+      # Parse la section [tools] du mise.toml et génère le dotenv
+      awk '
+        /^\[tools\]/ { in_tools=1; next }
+        /^\[/        { in_tools=0 }
+        in_tools && /=/ {
+          gsub(/[ \t"'\'']/, "")
+          split($0, a, "=")
+          tool = toupper(a[1])
+          gsub(/-/, "_", tool)
+          version = a[2]
+          print "MISE_" tool "_VERSION=" version
+        }
+      ' mise.toml > mise.env
+      cat mise.env
+  artifacts:
+    reports:
+      dotenv: mise.env
 
 # --- Hidden job : base for all mise-managed tools ---
 
@@ -56,46 +66,46 @@ mise-install:
 # --- STAGE: lint ---
 
 tf-fmt:
-  extends: .mise-base
+  image: hashicorp/terraform:{{ terraform_min_version }}
   stage: lint
   script:
-    - mise exec -- terraform fmt -check -recursive
+    - terraform fmt -check -recursive
 {%- if use_tflint %}
 
 tflint:
-  extends: .mise-base
+  image: ghcr.io/terraform-linters/tflint:v0.61.0
   stage: lint
   script:
-    - mise exec -- tflint --init
-    - mise exec -- tflint
+    - tflint --init
+    - tflint
 {%- endif %}
 
 {%- if use_trivy %}
 
 trivy:
-  extends: .mise-base
+image: aquasec/trivy:0.69.3
   stage: lint
   script:
-    - mise exec -- trivy config .
+    - trivy config .
 {%- endif %}
 
 # --- STAGE: validate ---
 
 tf-validate:
-  extends: .mise-base
+  image: hashicorp/terraform:{{ terraform_min_version }}
   stage: lint
   script:
-    - mise exec -- terraform init -backend=false
-    - mise exec -- terraform validate
+    - terraform init -backend=false
+    - terraform validate
 {%- if use_terraform_docs %}
 
 # --- STAGE: docs ---
 
 tf-docs:
-  extends: .mise-base
+  image: quay.io/terraform-docs/terraform-docs:0.21.0
   stage: docs
   script:
-    - mise exec -- terraform-docs --output-check .
+    - terraform-docs --output-check .
   needs: []
 
 {%- endif %}
