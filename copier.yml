@@ -25,10 +25,12 @@ _tasks:
 module_name:
   type: str
   help: Module name (e.g., terraform-aws-mymodule)
+  validator: "{% if not value | trim %}Module name cannot be empty.{% endif %}"
 
 module_description:
   type: str
   help: Short description of the module
+  validator: "{% if not value | trim %}Module description cannot be empty.{% endif %}"
 
 terraform_min_version:
   type: str
@@ -38,6 +40,7 @@ terraform_min_version:
 author_name:
   type: str
   help: Author name
+  validator: "{% if not value | trim %}Author name cannot be empty.{% endif %}"
 
 enable_pipeline:
   type: bool
@@ -56,12 +59,14 @@ ci_provider:
 github_repo:
   type: str
   help: GitHub repository (e.g., myorg/terraform-aws-mymodule)
-  when: "{{ ci_provider == 'github' }}"
+  when: "{{ enable_pipeline and ci_provider == 'github' }}"
+  validator: "{% if not value | trim %}GitHub repository cannot be empty.{% endif %}"
 
 gitlab_repo:
   type: str
   help: GitLab repository (e.g., myorg/terraform-aws-mymodule)
-  when: "{{ ci_provider == 'gitlab' }}"
+  when: "{{ enable_pipeline and ci_provider == 'gitlab' }}"
+  validator: "{% if not value | trim %}GitLab repository cannot be empty.{% endif %}"
 
 use_aws_provider:
   type: bool
