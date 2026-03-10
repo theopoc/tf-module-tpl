@@ -1,3 +1,12 @@
+# [1.10.0](https://github.com/theopoc/tf-module-tpl/compare/v1.9.0...v1.10.0) (2026-03-10)
+
+
+### Features
+
+* add dynamic default value for module_description ([b045397](https://github.com/theopoc/tf-module-tpl/commit/b045397ca940aa3d9cd6d9f448fc421bc9fc2c75))
+* add validators and fix conditional repo prompts in copier.yml ([5f06542](https://github.com/theopoc/tf-module-tpl/commit/5f0654297fabc6991e062f1663784b8d7ca27c3c))
+* replace provider booleans with multiselect question ([9391e2b](https://github.com/theopoc/tf-module-tpl/commit/9391e2baf7937cfd7d0da7ae04fb5117cecbb99a))
+
 # [1.9.0](https://github.com/theopoc/tf-module-tpl/compare/v1.8.0...v1.9.0) (2026-03-10)
 
 
