@@ -1,6 +1,5 @@
 stages:
   - lint
-  - validate
   - docs
   - release
 
@@ -72,7 +71,7 @@ trivy:
 
 tf-validate:
   extends: .mise-base
-  stage: validate
+  stage: lint
   script:
     - mise exec -- terraform init -backend=false
     - mise exec -- terraform validate
@@ -85,6 +84,8 @@ tf-docs:
   stage: docs
   script:
     - mise exec -- terraform-docs --output-check .
+  needs:
+    - tf-validate
 {%- endif %}
 {%- if use_semantic_release %}
 
