@@ -73,7 +73,7 @@ jobs:
         if: matrix.ci_provider == 'github'
         run: |
           curl --proto '=https' --tlsv1.2 -sSf \
-            https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+            https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash -s -- -b /usr/local/bin
 
       - name: Test generated lint.yml with act
         if: matrix.ci_provider == 'github'
