@@ -1,59 +1,3 @@
-include:
-  - component: gitlab.com/to-be-continuous/terraform/gitlab-ci-terraform@9.1.0
-    inputs:
-      gitlab-backend-disabled: true
-      fmt-enabled: true
-      validate-enabled: true
-{%- if not use_tflint %}
-      tflint-disabled: true
-{%- endif %}
-      trivy-disabled: false
-      trivy-image: docker.io/aquasec/trivy
-{%- if use_terraform_docs %}
-      docs-enabled: true
-      docs-image: quay.io/terraform-docs/terraform-docs:edge
-{%- endif %}
-{% if use_semantic_release %}
-release:
-  stage: .post
-  image: node:lts
-  before_script:
-    - npm ci
-  script:
-    - npx semantic-release
-  rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-  needs: []
-{%- endif %}
-
-{%- if use_tflint %}
-tf-tflint:
-  image: hashicorp/terraform:$TERRAFORM_VERSION
-  needs:
-    - job: find-tools-versions
-      artifacts: true
-{%- endif %}
-
-tf-fmt:
-  image: hashicorp/terraform:$TERRAFORM_VERSION
-  needs:
-    - job: find-tools-versions
-      artifacts: true
-
-tf-validate:
-  image: hashicorp/terraform:$TERRAFORM_VERSION
-  needs:
-    - job: find-tools-versions
-      artifacts: true
-
-{%- if use_trivy %}
-tf-trivy:
-  image: hashicorp/terraform:$TERRAFORM_VERSION
-  needs:
-    - job: find-tools-versions
-      artifacts: true
-{%- endif %}
-
 find-tools-versions:
   stage: .pre
   image:
@@ -67,3 +11,26 @@ find-tools-versions:
   artifacts:
     reports:
       dotenv: tools.env
+
+trigger-terraform:
+  stage: test
+  needs:
+    - job: find-tools-versions
+      artifacts: true
+  variables:
+    TERRAFORM_VERSION: $TERRAFORM_VERSION
+  trigger:
+    include: .gitlab-ci-terraform.yml
+    strategy: depend
+{% if use_semantic_release %}
+release:
+  stage: .post
+  image: node:lts
+  before_script:
+    - npm ci
+  script:
+    - npx semantic-release
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  needs: []
+{%- endif %}
