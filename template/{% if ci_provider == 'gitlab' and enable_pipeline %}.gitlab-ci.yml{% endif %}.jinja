@@ -1,7 +1,6 @@
 include:
   - component: gitlab.com/to-be-continuous/terraform/gitlab-ci-terraform@9.1.0
     inputs:
-      image: hashicorp/terraform:$TERRAFORM_VERSION
       gitlab-backend-disabled: true
       fmt-enabled: true
       validate-enabled: true
@@ -29,20 +28,24 @@ release:
 
 {%- if use_tflint %}
 tf-tflint:
+  image: hashicorp/terraform:$TERRAFORM_VERSION
   needs:
     - find-tools-versions
 {%- endif %}
 
 tf-fmt:
+  image: hashicorp/terraform:$TERRAFORM_VERSION
   needs:
     - find-tools-versions
 
 tf-validate:
+  image: hashicorp/terraform:$TERRAFORM_VERSION
   needs:
     - find-tools-versions
 
 {%- if use_trivy %}
 tf-trivy:
+  image: hashicorp/terraform:$TERRAFORM_VERSION
   needs:
     - find-tools-versions
 {%- endif %}
