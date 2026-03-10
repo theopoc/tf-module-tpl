@@ -134,4 +134,6 @@ jobs:
       - name: Test generated .gitlab-ci.yml with gitlab-ci-local
         if: matrix.ci_provider == 'gitlab'
         working-directory: /tmp/rendered
-        run: gitlab-ci-local find-tools-versions tf-fmt tf-validate tf-tflint tf-trivy tf-docs
+        run: gitlab-ci-local find-tools-versions tf-fmt tf-validate tf-tflint tf-trivy tf-docs --shell-isolation
+        env:
+          GCL_NEEDS: true
