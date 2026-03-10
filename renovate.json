@@ -35,6 +35,13 @@
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeStrategy": "squash"
+    },
+    {
+      "description": "Automerge tflint-ruleset-aws minor and patch updates when CI passes",
+      "matchPackageNames": ["terraform-linters/tflint-ruleset-aws"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeStrategy": "squash"
     }
   ],
   "customManagers": [
@@ -85,6 +92,14 @@
       "depNameTemplate": "hashicorp/awscc",
       "datasourceTemplate": "terraform-provider",
       "versioningTemplate": "hashicorp"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["template/\\{%.*use_tflint.*%\\}\\.tflint\\.hcl\\{%.*%\\}\\.jinja$"],
+      "matchStrings": ["plugin \"aws\" \\{[\\s\\S]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "terraform-linters/tflint-ruleset-aws",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
     }
   ]
 }
