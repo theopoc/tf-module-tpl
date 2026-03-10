@@ -36,6 +36,13 @@ jobs:
         with:
           working_directory: /tmp/mise-render
           cache: true
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('template/*package.json*.jinja') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
       - name: Configure git
         run: |
           git config --global user.email "ci@example.com"
