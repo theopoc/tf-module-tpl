@@ -3,6 +3,9 @@
 node = "lts"
 {%- endif %}
 terraform = "{{ terraform_min_version }}"
+{%- if use_trivy %}
+trivy = "0.69.3"
+{%- endif %}
 {%- if use_tflint %}
 tflint = "0.61.0"
 {%- endif %}

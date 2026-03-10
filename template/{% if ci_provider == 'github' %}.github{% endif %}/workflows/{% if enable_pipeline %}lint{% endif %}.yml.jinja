@@ -18,6 +18,9 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "{{ terraform_min_version }}"
+          cache: true
 
       - name: Terraform Format Check
         run: terraform fmt -check -recursive
@@ -30,10 +33,19 @@ jobs:
 {% if use_tflint %}
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: "v0.61.0"
+          cache: true
 
       - name: TFLint Init
         run: tflint --init
 
       - name: TFLint Run
         run: tflint
+{%- endif %}
+{% if use_trivy %}
+      - name: Run Trivy config scan
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+          trivy config . --exit-code 1
 {%- endif %}

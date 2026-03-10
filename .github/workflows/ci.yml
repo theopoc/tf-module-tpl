@@ -93,13 +93,15 @@ jobs:
       - name: Install act
         if: matrix.ci_provider == 'github'
         run: |
-          curl --proto '=https' --tlsv1.2 -sSf \
-            https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash -s -- -b /usr/local/bin
+          curl --proto '=https' --tlsv1.2 -sSfL \
+            https://github.com/nektos/act/releases/download/v0.2.74/act_Linux_x86_64.tar.gz \
+            | sudo tar xz -C /usr/local/bin act
 
       - name: Test generated lint.yml with act
         if: matrix.ci_provider == 'github'
         working-directory: /tmp/rendered
         run: |
+          git remote add origin https://github.com/myorg/terraform-aws-example.git
           act push \
             -W .github/workflows/lint.yml \
             -j lint \
@@ -111,7 +113,21 @@ jobs:
         if: matrix.ci_provider == 'gitlab'
         run: npm install -g gitlab-ci-local
 
+      - name: Cache npm dependencies
+        if: matrix.ci_provider == 'gitlab'
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('template/*package.json*.jinja', 'package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Preview with gitlab-ci-local
+        if: matrix.ci_provider == 'gitlab'
+        working-directory: /tmp/rendered
+        run: gitlab-ci-local --preview
+
       - name: Test generated .gitlab-ci.yml with gitlab-ci-local
         if: matrix.ci_provider == 'gitlab'
         working-directory: /tmp/rendered
-        run: gitlab-ci-local lint
+        run: gitlab-ci-local tf-fmt tflint trivy tf-validate tf-docs --pull-policy if-not-present --timestamps

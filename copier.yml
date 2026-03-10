@@ -35,7 +35,7 @@ module_description:
 
 terraform_min_version:
   type: str
-  default: "1.9"
+  default: "1.9.0"
   help: Minimum Terraform version required
 
 author_name:
@@ -94,6 +94,11 @@ use_tflint:
   type: bool
   default: true
   help: Enable TFLint for Terraform linting
+
+use_trivy:
+  type: bool
+  default: true
+  help: Enable Trivy for security scanning
 
 use_pre_commit:
   type: bool
