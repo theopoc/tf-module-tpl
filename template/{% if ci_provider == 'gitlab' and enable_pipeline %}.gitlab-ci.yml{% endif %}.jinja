@@ -30,24 +30,28 @@ release:
 tf-tflint:
   image: hashicorp/terraform:$TERRAFORM_VERSION
   needs:
-    - find-tools-versions
+    - job: find-tools-versions
+      artifacts: true
 {%- endif %}
 
 tf-fmt:
   image: hashicorp/terraform:$TERRAFORM_VERSION
   needs:
-    - find-tools-versions
+    - job: find-tools-versions
+      artifacts: true
 
 tf-validate:
   image: hashicorp/terraform:$TERRAFORM_VERSION
   needs:
-    - find-tools-versions
+    - job: find-tools-versions
+      artifacts: true
 
 {%- if use_trivy %}
 tf-trivy:
   image: hashicorp/terraform:$TERRAFORM_VERSION
   needs:
-    - find-tools-versions
+    - job: find-tools-versions
+      artifacts: true
 {%- endif %}
 
 find-tools-versions:
