@@ -1,3 +1,17 @@
+workflow:
+  rules:
+    # Pas de pipeline si c'est un tag (on déploie via autre workflow)
+    - if: '$CI_COMMIT_TAG'
+      when: never
+    # Pas de pipeline si la branche a une MR ouverte
+    # (le pipeline MR suffit)
+    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+    # Pour les merge requests
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    # Pour les pushs sur les branches
+    - if: '$CI_COMMIT_BRANCH'
+
 stages:
   - lint
   - docs
@@ -83,6 +97,7 @@ tf-docs:
   script:
     - mise exec -- terraform-docs --output-check .
   needs: []
+
 {%- endif %}
 {%- if use_semantic_release %}
 
