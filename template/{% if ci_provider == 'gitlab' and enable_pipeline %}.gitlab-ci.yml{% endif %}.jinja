@@ -1,30 +1,117 @@
+stages:
+  - lint
+  - validate
+  - docs
+  - release
+
+# --- .pre : parse .mise.toml pour extraire les versions ---
+
 find-tools-versions:
   stage: .pre
-  image:
-    name: jdxcode/mise
-    entrypoint: ["sh", "-c"]
-  script: |
-    for tools in $(mise ls -l --no-header -q); do
-      tool_name=$(echo $tools | awk '{print toupper($1)}')
-      version=$(echo $tools | awk '{print $2}')
-      echo "${tool_name}_VERSION=$version" >> tools.env ; done
+  image: alpine:latest
+  script:
+    - |
+      awk -F' *= *' '
+        /^\[tools\]/ { in_tools=1; next }
+        /^\[/ { in_tools=0 }
+        in_tools && /=/ {
+          gsub(/"/, "", $2)
+          name = toupper($1)
+          gsub(/-/, "_", name)
+          print name "_VERSION=" $2
+        }
+      ' .mise.toml > tools.env
+    - cat tools.env
   artifacts:
     reports:
       dotenv: tools.env
 
-trigger-terraform:
-  stage: test
+# --- Hidden job : base terraform ---
+
+.terraform-base:
+  before_script:
+    - apk add --no-cache curl unzip
+    - curl -fsSL "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" -o tf.zip
+    - unzip tf.zip -d /usr/local/bin/ && rm tf.zip
   needs:
     - job: find-tools-versions
       artifacts: true
-  variables:
-    TERRAFORM_VERSION: $TERRAFORM_VERSION
-  trigger:
-    include: .gitlab-ci-terraform.yml
-    strategy: depend
-{% if use_semantic_release %}
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+# --- STAGE: lint ---
+
+tf-fmt:
+  extends: .terraform-base
+  stage: lint
+  image: alpine:latest
+  script:
+    - terraform fmt -check -recursive
+{%- if use_tflint %}
+
+tflint:
+  stage: lint
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl unzip
+    - curl -fsSL "https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip" -o tflint.zip
+    - unzip tflint.zip -d /usr/local/bin/ && rm tflint.zip
+  script:
+    - tflint --init
+    - tflint
+  needs:
+    - job: find-tools-versions
+      artifacts: true
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+{%- endif %}
+
+trivy:
+  stage: lint
+  image: docker.io/aquasec/trivy:latest
+  script:
+    - trivy config .
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+# --- STAGE: validate ---
+
+tf-validate:
+  extends: .terraform-base
+  stage: validate
+  image: alpine:latest
+  script:
+    - terraform init -backend=false
+    - terraform validate
+{%- if use_terraform_docs %}
+
+# --- STAGE: docs ---
+
+tf-docs:
+  stage: docs
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl tar
+    - curl -fsSL "https://github.com/terraform-docs/terraform-docs/releases/download/v${TERRAFORM_DOCS_VERSION}/terraform-docs-v${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz" -o tfdocs.tar.gz
+    - tar -xzf tfdocs.tar.gz -C /usr/local/bin/ terraform-docs && rm tfdocs.tar.gz
+  script:
+    - terraform-docs diff . --check
+  needs:
+    - job: find-tools-versions
+      artifacts: true
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+{%- endif %}
+{%- if use_semantic_release %}
+
+# --- STAGE: release ---
+
 release:
-  stage: .post
+  stage: release
   image: node:lts
   before_script:
     - npm ci
@@ -32,5 +119,4 @@ release:
     - npx semantic-release
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-  needs: []
 {%- endif %}
