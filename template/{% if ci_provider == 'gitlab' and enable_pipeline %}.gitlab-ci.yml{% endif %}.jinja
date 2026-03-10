@@ -2,6 +2,10 @@ include:
   - component: gitlab.com/to-be-continuous/terraform/gitlab-ci-terraform@9.1.0
     inputs:
       image: hashicorp/terraform:latest
+      gitlab-backend-disabled: true
+      trivy-image: docker.io/aquasec/trivy
+      docs-enabled: true
+      docs-image: quay.io/terraform-docs/terraform-docs:edge
       fmt-enabled: true
       validate-enabled: true
 {%- if not use_tflint %}
