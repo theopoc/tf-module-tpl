@@ -73,6 +73,7 @@ jobs:
         with:
           name: rendered-${{ matrix.ci_provider }}
           path: /tmp/rendered
+          include-hidden-files: true
           retention-days: 1
 
   test-pipeline:
