@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/theopoc/tf-module-tpl/compare/v1.10.2...v1.10.3) (2026-03-10)
+
+
+### Bug Fixes
+
+* use variable names and minimum length in validators ([91dbaaa](https://github.com/theopoc/tf-module-tpl/commit/91dbaaa63bebe5e9347cdbeba937da1a36ac2a06))
+
 ## [1.10.2](https://github.com/theopoc/tf-module-tpl/compare/v1.10.1...v1.10.2) (2026-03-10)
 
 
