@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/theopoc/tf-module-tpl/compare/v1.10.1...v1.10.2) (2026-03-10)
+
+
+### Bug Fixes
+
+* use variable-based length validators in copier.yml ([24d4dd0](https://github.com/theopoc/tf-module-tpl/commit/24d4dd0a87bc2f67d0093b4507d4e66386b8cd44))
+
 ## [1.10.1](https://github.com/theopoc/tf-module-tpl/compare/v1.10.0...v1.10.1) (2026-03-10)
 
 
