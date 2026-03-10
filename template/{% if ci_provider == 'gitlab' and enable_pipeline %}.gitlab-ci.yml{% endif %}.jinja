@@ -83,7 +83,7 @@ tf-docs:
   extends: .mise-base
   stage: docs
   script:
-    - mise exec -- terraform-docs diff . --output-check
+    - mise exec -- terraform-docs --output-check .
 {%- endif %}
 {%- if use_semantic_release %}
 
