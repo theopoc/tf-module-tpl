@@ -111,7 +111,17 @@ jobs:
         if: matrix.ci_provider == 'gitlab'
         run: npm install -g gitlab-ci-local
 
+      - name: Pre-fetch to-be-continuous terraform component
+        if: matrix.ci_provider == 'gitlab'
+        working-directory: /tmp/rendered
+        run: |
+          version=$(grep -oP 'gitlab-ci-terraform@\K[0-9.]+' .gitlab-ci.yml)
+          cache_dir=".gitlab-ci-local/includes/gitlab.com/to-be-continuous/terraform/${version}"
+          mkdir -p "${cache_dir}"
+          curl -sSfL "https://gitlab.com/to-be-continuous/terraform/-/archive/${version}/terraform-${version}.tar.gz" \
+            | tar -xz --strip-components=1 -C "${cache_dir}"
+
       - name: Test generated .gitlab-ci.yml with gitlab-ci-local
         if: matrix.ci_provider == 'gitlab'
         working-directory: /tmp/rendered
-        run: gitlab-ci-local lint
+        run: gitlab-ci-local --list
