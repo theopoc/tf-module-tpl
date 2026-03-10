@@ -121,9 +121,16 @@ jobs:
         working-directory: /tmp/rendered
         run: gitlab-ci-local --preview
 
+      - name: Cache gitlab-ci-local mise installs
+        if: matrix.ci_provider == 'gitlab'
+        uses: actions/cache@v4
+        with:
+          path: /tmp/rendered/.gitlab-ci-local/cache
+          key: gcl-mise-${{ hashFiles('/tmp/rendered/.mise.toml') }}
+
       - name: Test generated .gitlab-ci.yml with gitlab-ci-local
         if: matrix.ci_provider == 'gitlab'
         working-directory: /tmp/rendered
-        run: gitlab-ci-local find-tools-versions tf-fmt tf-validate tf-tflint tf-trivy tf-docs --shell-isolation
+        run: gitlab-ci-local mise-install tf-fmt tflint trivy tf-validate tf-docs --shell-isolation
         env:
           GCL_NEEDS: true
