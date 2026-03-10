@@ -25,7 +25,6 @@ _tasks:
 module_name:
   type: str
   help: Module name (e.g., terraform-aws-mymodule)
-  validator: "{% if not value | trim %}Module name cannot be empty.{% endif %}"
 
 module_description:
   type: str
