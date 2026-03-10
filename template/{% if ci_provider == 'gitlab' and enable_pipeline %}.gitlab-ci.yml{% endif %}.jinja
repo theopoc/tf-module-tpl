@@ -27,6 +27,26 @@ release:
   needs: []
 {%- endif %}
 
+{%- if use_tflint %}
+tf-tflint:
+  needs:
+    - find-tools-versions
+{%- endif %}
+
+tf-fmt:
+  needs:
+    - find-tools-versions
+
+tf-validate:
+  needs:
+    - find-tools-versions
+
+{%- if use_trivy %}
+tf-trivy:
+  needs:
+    - find-tools-versions
+{%- endif %}
+
 find-tools-versions:
   stage: .pre
   image: jdxcode/mise
