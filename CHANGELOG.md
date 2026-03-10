@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/theopoc/tf-module-tpl/compare/v1.10.0...v1.10.1) (2026-03-10)
+
+
+### Bug Fixes
+
+* remove validator from module_name question ([fa30c06](https://github.com/theopoc/tf-module-tpl/commit/fa30c060cb2b9649ec154872d215ec491aca97ba))
+
 # [1.10.0](https://github.com/theopoc/tf-module-tpl/compare/v1.9.0...v1.10.0) (2026-03-10)
 
 
