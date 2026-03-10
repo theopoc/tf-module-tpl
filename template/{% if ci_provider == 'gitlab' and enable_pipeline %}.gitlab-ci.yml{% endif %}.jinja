@@ -4,6 +4,13 @@ stages:
   - release
 
 # --- .pre : install tools via mise and share as artifact ---
+.mise-cache: &mise-cache
+  key:
+    prefix: mise-
+    files: ["mise.toml", "./bin/mise"]
+  paths:
+    - .mise/installs
+    - .mise/mise-2025.1.3
 
 mise-install:
   stage: .pre
@@ -11,47 +18,36 @@ mise-install:
     name: ghcr.io/jdx/mise:latest
     entrypoint: [""]
   variables:
-    MISE_DATA_DIR: ${CI_PROJECT_DIR}/.mise/mise-data
+    MISE_DATA_DIR: $CI_PROJECT_DIR/.mise/mise-data
   cache:
     - key:
         prefix: mise-
         files:
           - .mise.toml
       paths:
-        - .mise/mise-data
+        - $MISE_DATA_DIR
   script:
-    - mise install
-    - mise ls
-  artifacts:
-    paths:
-      - .mise/mise-data/installs
+    - mise install -q
 
 # --- Hidden job : base for all mise-managed tools ---
 
-.mise-base:
-  image:
-    name: ghcr.io/jdx/mise:latest
-    entrypoint: [""]
-  variables:
-    MISE_DATA_DIR: ${CI_PROJECT_DIR}/.mise/mise-data
-  needs:
-    - job: mise-install
-      artifacts: true
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
 
 # --- STAGE: lint ---
 
 tf-fmt:
-  extends: .mise-base
+  cache:
+    - <<: *mise-cache
+      policy: pull-push
   stage: lint
   script:
     - mise exec -- terraform fmt -check -recursive
 {%- if use_tflint %}
 
 tflint:
-  extends: .mise-base
+  cache:
+    - <<: *mise-cache
+      policy: pull-push
   stage: lint
   script:
     - mise exec -- tflint --init
@@ -61,7 +57,9 @@ tflint:
 {%- if use_trivy %}
 
 trivy:
-  extends: .mise-base
+  cache:
+    - <<: *mise-cache
+      policy: pull-push
   stage: lint
   script:
     - mise exec -- trivy config .
@@ -70,7 +68,9 @@ trivy:
 # --- STAGE: validate ---
 
 tf-validate:
-  extends: .mise-base
+  cache:
+    - <<: *mise-cache
+      policy: pull-push
   stage: lint
   script:
     - mise exec -- terraform init -backend=false
@@ -80,7 +80,9 @@ tf-validate:
 # --- STAGE: docs ---
 
 tf-docs:
-  extends: .mise-base
+  cache:
+    - <<: *mise-cache
+      policy: pull-push
   stage: docs
   script:
     - mise exec -- terraform-docs --output-check .
