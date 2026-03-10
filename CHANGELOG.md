@@ -1,3 +1,16 @@
+# [1.9.0](https://github.com/theopoc/tf-module-tpl/compare/v1.8.0...v1.9.0) (2026-03-10)
+
+
+### Bug Fixes
+
+* run pre-commit autoupdate before initial git commit ([efe5ad1](https://github.com/theopoc/tf-module-tpl/commit/efe5ad111e84ae320c904758105c9bc857d91e01))
+
+
+### Features
+
+* add copier answers file template ([35aad02](https://github.com/theopoc/tf-module-tpl/commit/35aad02bb21eab2fe0df5c649232ba9a0a4e9a6c))
+* add tflint-ruleset-aws plugin when AWS provider is used ([42cea34](https://github.com/theopoc/tf-module-tpl/commit/42cea3403f12bfdafabff55db073977b14b66790))
+
 # [1.8.0](https://github.com/theopoc/tf-module-tpl/compare/v1.7.2...v1.8.0) (2026-03-09)
 
 
