@@ -50,6 +50,9 @@ tf-fmt:
   stage: lint
   script:
     - terraform fmt -check -recursive -write=false -diff
+  needs:
+    - job: parse-mise-versions
+      artifacts: true
 {%- if use_tflint %}
 
 tflint:
@@ -60,6 +63,9 @@ tflint:
   script:
     - tflint --init
     - tflint --recursive
+  needs:
+    - job: parse-mise-versions
+      artifacts: true
 {%- endif %}
 
 {%- if use_trivy %}
@@ -71,6 +77,9 @@ trivy:
   stage: lint
   script:
     - trivy config .
+  needs:
+    - job: parse-mise-versions
+      artifacts: true
 {%- endif %}
 
 # --- STAGE: validate ---
@@ -83,6 +92,9 @@ tf-validate:
   script:
     - terraform init -backend=false
     - terraform validate
+  needs:
+    - job: parse-mise-versions
+      artifacts: true
 {%- if use_terraform_docs %}
 
 # --- STAGE: docs ---
@@ -94,7 +106,9 @@ tf-docs:
   stage: docs
   script:
     - terraform-docs --output-check .
-  needs: []
+  needs:
+    - job: parse-mise-versions
+      artifacts: true
 
 {%- endif %}
 {%- if use_semantic_release %}
