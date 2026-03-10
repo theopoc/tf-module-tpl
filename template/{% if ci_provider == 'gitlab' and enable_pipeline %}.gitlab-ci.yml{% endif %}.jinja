@@ -17,14 +17,6 @@ stages:
   - docs
   - release
 
-# --- .pre : install tools via mise and share as artifact ---
-.mise-cache: &mise-cache
-  key:
-    prefix: mise-
-    files: ["mise.toml"]
-  paths:
-    - .mise/installs
-    - .mise/shims
 
 parse-mise-versions:
   stage: .pre
@@ -49,42 +41,32 @@ parse-mise-versions:
     reports:
       dotenv: mise.env
 
-# --- Hidden job : base for all mise-managed tools ---
-
-.mise-base:
-  image:
-    name: ghcr.io/jdx/mise:latest
-    entrypoint: [""]
-  variables:
-    MISE_DATA_DIR: $CI_PROJECT_DIR/.mise
-  cache:
-    - <<: *mise-cache
-      policy: pull
-
-
-
 # --- STAGE: lint ---
 
 tf-fmt:
-  image: hashicorp/terraform:{{ terraform_min_version }}
+  image:
+    name: hashicorp/terraform:{{ terraform_min_version }}
+    entrypoint: [""]
   stage: lint
   script:
     - terraform fmt -check -recursive -write=false -diff
 {%- if use_tflint %}
 
 tflint:
-  image: ghcr.io/terraform-linters/tflint:v0.46.0
+  image:
+    name: ghcr.io/terraform-linters/tflint:v$MISE_TFLINT_VERSION
+    entrypoint: [""]
   stage: lint
   script:
     - tflint --init
-    - tflint
+    - tflint --recursive
 {%- endif %}
 
 {%- if use_trivy %}
 
 trivy:
   image:
-    name: aquasec/trivy:0.69.3
+    name: aquasec/trivy:$MISE_TRIVY_VERSION
     entrypoint: [""]
   stage: lint
   script:
@@ -106,7 +88,9 @@ tf-validate:
 # --- STAGE: docs ---
 
 tf-docs:
-  image: quay.io/terraform-docs/terraform-docs:0.20.0
+  image:
+    name: quay.io/terraform-docs/terraform-docs:$MISE_TERRAFORM_DOCS_VERSION
+    entrypoint: [""]
   stage: docs
   script:
     - terraform-docs --output-check .
