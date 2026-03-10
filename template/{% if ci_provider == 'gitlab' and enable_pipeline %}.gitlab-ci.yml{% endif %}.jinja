@@ -13,6 +13,12 @@ mise-install:
     entrypoint: [""]
   variables:
     MISE_DATA_DIR: ${CI_PROJECT_DIR}/.mise-data
+  cache:
+    key:
+      files:
+        - .mise.toml
+    paths:
+      - .mise-data/installs
   script:
     - mise install
     - mise ls
