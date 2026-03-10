@@ -1,7 +1,7 @@
 include:
   - component: gitlab.com/to-be-continuous/terraform/gitlab-ci-terraform@9.1.0
     inputs:
-      image: hashicorp/terraform:latest
+      image: hashicorp/terraform:$TERRAFORM_VERSION
       gitlab-backend-disabled: true
       fmt-enabled: true
       validate-enabled: true
@@ -26,3 +26,15 @@ release:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
   needs: []
 {%- endif %}
+
+find-tools-versions:
+  stage: .pre
+  image: jdxcode/mise
+  script: |
+    for tools in $(mise ls -l --no-header -q); do
+      tool_name=$(echo $tools | awk '{print toupper($1)}')
+      version=$(echo $tools | awk '{print $2}')
+      echo "${tool_name}_VERSION=$version" >> tools.env
+  artifacts:
+    reports:
+      dotenv: tools.env
