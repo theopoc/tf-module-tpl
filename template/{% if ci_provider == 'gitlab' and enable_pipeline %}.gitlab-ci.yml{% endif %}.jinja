@@ -83,7 +83,7 @@ tflint:
 {%- if use_trivy %}
 
 trivy:
-image: aquasec/trivy:0.69.3
+  image: aquasec/trivy:0.69.3
   stage: lint
   script:
     - trivy config .
