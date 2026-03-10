@@ -15,9 +15,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  render-test:
-    name: Render Test
+  render:
+    name: Render (${{ matrix.ci_provider }})
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        ci_provider: [github, gitlab]
     steps:
       - uses: actions/checkout@v6
         with:
@@ -36,8 +39,9 @@ jobs:
             --data module_name=terraform-aws-example \
             --data module_description="Example module" \
             --data author_name="Test Author" \
-            --data ci_provider=github \
-            --data github_repo=myorg/terraform-aws-example
+            --data ci_provider=${{ matrix.ci_provider }} \
+            --data github_repo=myorg/terraform-aws-example \
+            --data gitlab_repo=myorg/terraform-aws-example
       - uses: jdx/mise-action@v3
         with:
           working_directory: /tmp/mise-render
@@ -61,5 +65,53 @@ jobs:
             --data module_name=terraform-aws-example \
             --data module_description="Example module" \
             --data author_name="Test Author" \
-            --data ci_provider=github \
-            --data github_repo=myorg/terraform-aws-example
+            --data ci_provider=${{ matrix.ci_provider }} \
+            --data github_repo=myorg/terraform-aws-example \
+            --data gitlab_repo=myorg/terraform-aws-example
+      - name: Upload rendered artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-${{ matrix.ci_provider }}
+          path: /tmp/rendered
+          include-hidden-files: true
+          retention-days: 1
+
+  test-pipeline:
+    name: Test Pipeline (${{ matrix.ci_provider }})
+    runs-on: ubuntu-24.04
+    needs: render
+    strategy:
+      matrix:
+        ci_provider: [github, gitlab]
+    steps:
+      - name: Download rendered artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: rendered-${{ matrix.ci_provider }}
+          path: /tmp/rendered
+
+      - name: Install act
+        if: matrix.ci_provider == 'github'
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf \
+            https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash -s -- -b /usr/local/bin
+
+      - name: Test generated lint.yml with act
+        if: matrix.ci_provider == 'github'
+        working-directory: /tmp/rendered
+        run: |
+          act push \
+            -W .github/workflows/lint.yml \
+            -j lint \
+            -P ubuntu-latest=catthehacker/ubuntu:act-latest \
+            --no-cache-server \
+            --artifact-server-path /tmp/act-artifacts
+
+      - name: Install gitlab-ci-local
+        if: matrix.ci_provider == 'gitlab'
+        run: npm install -g gitlab-ci-local
+
+      - name: Test generated .gitlab-ci.yml with gitlab-ci-local
+        if: matrix.ci_provider == 'gitlab'
+        working-directory: /tmp/rendered
+        run: gitlab-ci-local lint
