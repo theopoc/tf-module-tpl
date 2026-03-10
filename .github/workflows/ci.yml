@@ -121,6 +121,16 @@ jobs:
           curl -sSfL "https://gitlab.com/to-be-continuous/terraform/-/archive/${version}/terraform-${version}.tar.gz" \
             | tar -xz --strip-components=1 -C "${cache_dir}"
 
+      - name: List all jobs with gitlab-ci-local
+        if: matrix.ci_provider == 'gitlab'
+        working-directory: /tmp/rendered
+        run: gitlab-ci-local --list
+
+      - name: Preview with gitlab-ci-local
+        if: matrix.ci_provider == 'gitlab'
+        working-directory: /tmp/rendered
+        run: gitlab-ci-local --preview
+
       - name: Test generated .gitlab-ci.yml with gitlab-ci-local
         if: matrix.ci_provider == 'gitlab'
         working-directory: /tmp/rendered
