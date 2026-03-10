@@ -8,7 +8,9 @@ stages:
 
 mise-install:
   stage: .pre
-  image: ghcr.io/jdx/mise:latest
+  image:
+    name: ghcr.io/jdx/mise:latest
+    entrypoint: [""]
   variables:
     MISE_DATA_DIR: ${CI_PROJECT_DIR}/.mise-data
   script:
@@ -21,7 +23,9 @@ mise-install:
 # --- Hidden job : base for all mise-managed tools ---
 
 .mise-base:
-  image: ghcr.io/jdx/mise:latest
+  image:
+    name: ghcr.io/jdx/mise:latest
+    entrypoint: [""]
   variables:
     MISE_DATA_DIR: ${CI_PROJECT_DIR}/.mise-data
   needs:
