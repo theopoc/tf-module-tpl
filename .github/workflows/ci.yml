@@ -130,4 +130,4 @@ jobs:
       - name: Test generated .gitlab-ci.yml with gitlab-ci-local
         if: matrix.ci_provider == 'gitlab'
         working-directory: /tmp/rendered
-        run: gitlab-ci-local --pull-policy if-not-present --timestamps
+        run: gitlab-ci-local tf-fmt tflint trivy tf-validate tf-docs --pull-policy if-not-present --timestamps
