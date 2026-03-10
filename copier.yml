@@ -95,6 +95,11 @@ use_tflint:
   default: true
   help: Enable TFLint for Terraform linting
 
+use_trivy:
+  type: bool
+  default: true
+  help: Enable Trivy for security scanning
+
 use_pre_commit:
   type: bool
   default: true

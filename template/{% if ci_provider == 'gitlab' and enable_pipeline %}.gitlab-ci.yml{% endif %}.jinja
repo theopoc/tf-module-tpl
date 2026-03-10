@@ -59,15 +59,13 @@ tflint:
     - mise exec -- tflint
 {%- endif %}
 
-{%- if use_tflint %}
+{%- if use_trivy %}
+
 trivy:
   extends: .mise-base
   stage: lint
   script:
     - mise exec -- trivy config .
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 {%- endif %}
 
 # --- STAGE: validate ---

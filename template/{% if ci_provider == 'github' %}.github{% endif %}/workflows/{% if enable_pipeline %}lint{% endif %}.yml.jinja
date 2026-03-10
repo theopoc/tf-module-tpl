@@ -37,3 +37,11 @@ jobs:
       - name: TFLint Run
         run: tflint
 {%- endif %}
+{% if use_trivy %}
+      - name: Setup Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          scan-ref: .
+          exit-code: '1'
+{%- endif %}
