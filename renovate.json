@@ -41,6 +41,12 @@
       "pinDigests": false
     },
     {
+      "description": "Automerge copier minor and patch updates",
+      "matchPackageNames": ["copier"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
       "description": "Group all mise tool updates into a single PR",
       "matchManagers": ["custom.regex"],
       "matchPackageNames": [
