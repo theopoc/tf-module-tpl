@@ -117,7 +117,7 @@ tf-docs:
 
 release:
   stage: release
-  image: node:lts
+  image: node:$MISE_NODE_VERSION
   before_script:
     - npm ci
   script:
