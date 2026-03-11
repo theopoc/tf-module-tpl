@@ -1,15 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
+  "extends": ["config:best-practices"],
   "semanticCommits": "enabled",
-  "dependencyDashboard": true,
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",
+  "dependencyDashboard": true,
   "platformAutomerge": true,
+  "automergeStrategy": "squash",
+  "minimumReleaseAge": "3 days",
+  "prConcurrentLimit": 5,
+  "labels": ["dependencies"],
   "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
     "labels": ["security"],
-    "automerge": true
+    "automerge": true,
+    "minimumReleaseAge": "0 days"
   },
   "packageRules": [
     {
@@ -18,39 +23,33 @@
       "enabled": false
     },
     {
-      "description": "Automerge mise tool updates when CI passes",
+      "description": "Automerge minor and patch updates for tracked managers when CI passes",
+      "matchManagers": ["custom.regex", "github-actions", "uv"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Automerge Terraform, providers, and tflint-ruleset-aws minor and patch updates when CI passes",
       "matchManagers": ["custom.regex"],
+      "matchPackageNames": ["terraform", "hashicorp/aws", "hashicorp/awscc", "terraform-linters/tflint-ruleset-aws"],
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeStrategy": "squash"
+      "automerge": true
     },
     {
-      "description": "Automerge GitHub Actions minor and patch updates when CI passes",
+      "description": "Group all mise tool updates into a single PR",
+      "matchManagers": ["custom.regex"],
+      "matchPackageNames": [
+        "terraform-linters/tflint",
+        "aquasecurity/trivy",
+        "terraform-docs/terraform-docs",
+        "pre-commit"
+      ],
+      "groupName": "mise tools"
+    },
+    {
+      "description": "Group GitHub Actions updates into a single PR",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeStrategy": "squash"
-    },
-    {
-      "description": "Automerge uv dependency minor and patch updates when CI passes",
-      "matchManagers": ["uv"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeStrategy": "squash"
-    },
-    {
-      "description": "Automerge tflint-ruleset-aws minor and patch updates when CI passes",
-      "matchPackageNames": ["terraform-linters/tflint-ruleset-aws"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeStrategy": "squash"
-    },
-    {
-      "description": "Automerge Terraform and providers minor and patch updates when CI passes",
-      "matchPackageNames": ["terraform", "hashicorp/aws", "hashicorp/awscc"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeStrategy": "squash"
+      "groupName": "github actions"
     }
   ],
   "customManagers": [
