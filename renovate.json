@@ -7,14 +7,14 @@
   "dependencyDashboard": true,
   "platformAutomerge": true,
   "automergeStrategy": "squash",
-  "minimumReleaseAge": "3 days",
+  "minimumReleaseAge": "7 days",
   "prConcurrentLimit": 5,
   "labels": ["dependencies"],
   "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
     "labels": ["security"],
     "automerge": true,
-    "minimumReleaseAge": "0 days"
+    "minimumReleaseAge": "7 days"
   },
   "packageRules": [
     {
