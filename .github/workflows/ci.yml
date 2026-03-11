@@ -26,7 +26,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
         with:
           enable-cache: true
       - name: Install dependencies
@@ -48,7 +48,7 @@ jobs:
           working_directory: /tmp/mise-render
           cache: true
       - name: Cache npm dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('template/*package.json*.jinja', 'package-lock.json') }}
@@ -70,7 +70,7 @@ jobs:
             --data github_repo=myorg/terraform-aws-example \
             --data gitlab_repo=myorg/terraform-aws-example
       - name: Upload rendered artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
           name: rendered-${{ matrix.ci_provider }}
           path: /tmp/rendered
@@ -86,7 +86,7 @@ jobs:
         ci_provider: [github, gitlab]
     steps:
       - name: Download rendered artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8
         with:
           name: rendered-${{ matrix.ci_provider }}
           path: /tmp/rendered
@@ -116,7 +116,7 @@ jobs:
 
       - name: Cache npm dependencies
         if: matrix.ci_provider == 'gitlab'
-        uses: actions/cache@v4
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('template/*package.json*.jinja', 'package-lock.json') }}
