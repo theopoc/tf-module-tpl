@@ -36,6 +36,11 @@
       "automerge": true
     },
     {
+      "description": "Disable digest pinning for terraform-docs (target file is not a Dockerfile)",
+      "matchPackageNames": ["quay.io/terraform-docs/terraform-docs"],
+      "pinDigests": false
+    },
+    {
       "description": "Group all mise tool updates into a single PR",
       "matchManagers": ["custom.regex"],
       "matchPackageNames": [
@@ -75,8 +80,7 @@
       "matchStrings": ["terraform-docs = \"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "quay.io/terraform-docs/terraform-docs",
       "datasourceTemplate": "docker",
-      "versioningTemplate": "semver",
-      "pinDigests": false
+      "versioningTemplate": "semver"
     },
     {
       "customType": "regex",
