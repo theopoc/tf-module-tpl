@@ -1,3 +1,10 @@
+## [1.11.7](https://github.com/theopoc/tf-module-tpl/compare/v1.11.6...v1.11.7) (2026-03-11)
+
+
+### Bug Fixes
+
+* **renovate:** automerge copier updates by package name ([6f5fb96](https://github.com/theopoc/tf-module-tpl/commit/6f5fb961b51c9677e5f3e80eef67a5efef507a6f))
+
 ## [1.11.6](https://github.com/theopoc/tf-module-tpl/compare/v1.11.5...v1.11.6) (2026-03-11)
 
 
