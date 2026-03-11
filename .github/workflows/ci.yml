@@ -9,6 +9,7 @@ on:
       - '.gitignore'
       - 'renovate.json'
   workflow_dispatch:
+  merge_group:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
