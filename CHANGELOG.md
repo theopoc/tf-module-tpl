@@ -1,3 +1,10 @@
+## [1.11.4](https://github.com/theopoc/tf-module-tpl/compare/v1.11.3...v1.11.4) (2026-03-11)
+
+
+### Bug Fixes
+
+* **renovate:** use docker datasource for terraform-docs to ensure quay.io image exists ([05ae504](https://github.com/theopoc/tf-module-tpl/commit/05ae504f9efa68aaae9ff344ed2391af0d9cc11d))
+
 ## [1.11.3](https://github.com/theopoc/tf-module-tpl/compare/v1.11.2...v1.11.3) (2026-03-11)
 
 ## [1.11.2](https://github.com/theopoc/tf-module-tpl/compare/v1.11.1...v1.11.2) (2026-03-11)
