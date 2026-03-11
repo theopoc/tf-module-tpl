@@ -3,5 +3,5 @@ name = "tf-module-tpl"
 version = "0.0.0"
 requires-python = ">=3.11"
 dependencies = [
-    "copier==9.11.2",
+    "copier==9.12.0",
 ]
