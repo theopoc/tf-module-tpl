@@ -1,3 +1,10 @@
+## [1.11.5](https://github.com/theopoc/tf-module-tpl/compare/v1.11.4...v1.11.5) (2026-03-11)
+
+
+### Bug Fixes
+
+* **renovate:** disable digest pinning for terraform-docs customManager ([0ac41ee](https://github.com/theopoc/tf-module-tpl/commit/0ac41eeaab2d688812319560820db3cfb6bd71b9))
+
 ## [1.11.4](https://github.com/theopoc/tf-module-tpl/compare/v1.11.3...v1.11.4) (2026-03-11)
 
 
