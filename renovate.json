@@ -41,7 +41,7 @@
       "matchPackageNames": [
         "terraform-linters/tflint",
         "aquasecurity/trivy",
-        "terraform-docs/terraform-docs",
+        "quay.io/terraform-docs/terraform-docs",
         "pre-commit"
       ],
       "groupName": "mise tools"
@@ -73,8 +73,8 @@
       "customType": "regex",
       "fileMatch": ["template/\\.mise\\.toml\\.jinja$"],
       "matchStrings": ["terraform-docs = \"(?<currentValue>[^\"]+)\""],
-      "depNameTemplate": "terraform-docs/terraform-docs",
-      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "quay.io/terraform-docs/terraform-docs",
+      "datasourceTemplate": "docker",
       "versioningTemplate": "semver"
     },
     {
