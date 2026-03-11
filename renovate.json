@@ -3,6 +3,7 @@
   "extends": ["config:recommended"],
   "semanticCommits": "enabled",
   "semanticCommitType": "fix",
+  "dependencyDashboard": true,
   "platformAutomerge": true,
   "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
@@ -39,6 +40,13 @@
     {
       "description": "Automerge tflint-ruleset-aws minor and patch updates when CI passes",
       "matchPackageNames": ["terraform-linters/tflint-ruleset-aws"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeStrategy": "squash"
+    },
+    {
+      "description": "Automerge Terraform and providers minor and patch updates when CI passes",
+      "matchPackageNames": ["terraform", "hashicorp/aws", "hashicorp/awscc"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeStrategy": "squash"
