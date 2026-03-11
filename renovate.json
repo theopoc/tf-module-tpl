@@ -75,7 +75,8 @@
       "matchStrings": ["terraform-docs = \"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "quay.io/terraform-docs/terraform-docs",
       "datasourceTemplate": "docker",
-      "versioningTemplate": "semver"
+      "versioningTemplate": "semver",
+      "pinDigests": false
     },
     {
       "customType": "regex",
