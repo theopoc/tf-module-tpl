@@ -1,3 +1,10 @@
+## [1.11.6](https://github.com/theopoc/tf-module-tpl/compare/v1.11.5...v1.11.6) (2026-03-11)
+
+
+### Bug Fixes
+
+* **renovate:** move pinDigests to packageRules for terraform-docs ([4aaab03](https://github.com/theopoc/tf-module-tpl/commit/4aaab03cbd8ef6eaf590ac67b0aeb79324d3d72e))
+
 ## [1.11.5](https://github.com/theopoc/tf-module-tpl/compare/v1.11.4...v1.11.5) (2026-03-11)
 
 
