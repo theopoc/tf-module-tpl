@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/theopoc/tf-module-tpl/compare/v1.12.0...v1.13.0) (2026-03-12)
+
+
+### Features
+
+* remove github/gitlab repository name ([6996fa3](https://github.com/theopoc/tf-module-tpl/commit/6996fa3c58631aecd73eb3b0711c30ac6198cb87))
+
 # [1.12.0](https://github.com/theopoc/tf-module-tpl/compare/v1.11.11...v1.12.0) (2026-03-12)
 
 
