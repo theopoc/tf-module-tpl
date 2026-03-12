@@ -90,6 +90,12 @@ awscc_provider_version:
   help: AWS Cloud Control provider version constraint
   when: "{{ 'awscc' in providers }}"
 
+null_provider_version:
+  type: str
+  default: "~> 3.0"
+  help: Null provider version constraint
+  when: false
+
 use_tflint:
   type: bool
   default: true
