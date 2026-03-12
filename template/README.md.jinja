@@ -6,11 +6,7 @@
 
 ```hcl
 module "{{ module_name | replace('-', '_') }}" {
-  {%- if ci_provider == 'github' %}
-  source  = "{{ github_repo }}"
-  {%- elif ci_provider == 'gitlab' %}
-  source  = "{{ gitlab_repo }}"
-  {%- endif %}
+  source  = "{{ _folder_name }}"
   version = "~> 1.0"
 
   name = "example"

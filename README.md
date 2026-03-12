@@ -114,7 +114,6 @@ copier copy https://github.com/theopoc/tf-module-tpl my-module \
   --data module_name="terraform-aws-vpc" \
   --data module_description="AWS VPC Terraform module" \
   --data author_name="Your Name" \
-  --data github_repo="myorg/terraform-aws-vpc" \
   --data use_aws_provider=true
 ```
 

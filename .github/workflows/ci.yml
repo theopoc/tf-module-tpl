@@ -41,8 +41,6 @@ jobs:
             --data module_description="Example module" \
             --data author_name="Test Author" \
             --data ci_provider=${{ matrix.ci_provider }} \
-            --data github_repo=myorg/terraform-aws-example \
-            --data gitlab_repo=myorg/terraform-aws-example
       - uses: jdx/mise-action@v3
         with:
           working_directory: /tmp/mise-render
@@ -67,8 +65,6 @@ jobs:
             --data module_description="Example module" \
             --data author_name="Test Author" \
             --data ci_provider=${{ matrix.ci_provider }} \
-            --data github_repo=myorg/terraform-aws-example \
-            --data gitlab_repo=myorg/terraform-aws-example
       - name: Upload rendered artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:

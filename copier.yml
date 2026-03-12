@@ -57,18 +57,6 @@ ci_provider:
   default: "github"
   when: "{{ enable_pipeline }}"
 
-github_repo:
-  type: str
-  help: GitHub repository (e.g., myorg/terraform-aws-mymodule)
-  when: "{{ enable_pipeline and ci_provider == 'github' }}"
-  validator: "{% if github_repo | trim | length < 3 %}GitHub repository must be at least 3 characters.{% endif %}"
-
-gitlab_repo:
-  type: str
-  help: GitLab repository (e.g., myorg/terraform-aws-mymodule)
-  when: "{{ enable_pipeline and ci_provider == 'gitlab' }}"
-  validator: "{% if gitlab_repo | trim | length < 3 %}GitLab repository must be at least 3 characters.{% endif %}"
-
 providers:
   type: yaml
   help: Which Terraform providers do you want to add?
