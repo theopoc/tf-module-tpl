@@ -1,3 +1,11 @@
+## [1.11.8](https://github.com/theopoc/tf-module-tpl/compare/v1.11.7...v1.11.8) (2026-03-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency copier to v9.12.0 ([#21](https://github.com/theopoc/tf-module-tpl/issues/21)) ([257737b](https://github.com/theopoc/tf-module-tpl/commit/257737b464548ee4d532a7ef3cb7ee15b828d4da))
+* **release:** use fine-grained PAT to bypass branch protection ([fc0bfcb](https://github.com/theopoc/tf-module-tpl/commit/fc0bfcbb4b2d4a9bd752a3f6ab84331d5ce4cb96))
+
 ## [1.11.7](https://github.com/theopoc/tf-module-tpl/compare/v1.11.6...v1.11.7) (2026-03-11)
 
 
