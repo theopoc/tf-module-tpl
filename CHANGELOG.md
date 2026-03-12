@@ -1,3 +1,10 @@
+## [1.11.9](https://github.com/theopoc/tf-module-tpl/compare/v1.11.8...v1.11.9) (2026-03-12)
+
+
+### Bug Fixes
+
+* **ci:** remove renovate.json from paths-ignore ([f6cf4e1](https://github.com/theopoc/tf-module-tpl/commit/f6cf4e123a994e5ca0bf55be4074cba36a43c35b))
+
 ## [1.11.8](https://github.com/theopoc/tf-module-tpl/compare/v1.11.7...v1.11.8) (2026-03-12)
 
 

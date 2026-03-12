@@ -1,6 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices"],
+  "extends": [
+    "config:best-practices"
+  ],
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",
@@ -9,46 +11,78 @@
   "automergeStrategy": "squash",
   "minimumReleaseAge": "7 days",
   "prConcurrentLimit": 5,
-  "labels": ["dependencies"],
+  "labels": [
+    "dependencies"
+  ],
   "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
-    "labels": ["security"],
+    "labels": [
+      "security"
+    ],
     "automerge": true,
     "minimumReleaseAge": "7 days"
   },
   "packageRules": [
     {
       "description": "Disable all npm non-security updates",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "enabled": false
     },
     {
       "description": "Automerge minor and patch updates for tracked managers when CI passes",
-      "matchManagers": ["custom.regex", "github-actions", "uv"],
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchManagers": [
+        "custom.regex",
+        "github-actions",
+        "uv"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "automerge": true
     },
     {
       "description": "Automerge Terraform, providers, and tflint-ruleset-aws minor and patch updates when CI passes",
-      "matchManagers": ["custom.regex"],
-      "matchPackageNames": ["terraform", "hashicorp/aws", "hashicorp/awscc", "terraform-linters/tflint-ruleset-aws"],
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchManagers": [
+        "custom.regex"
+      ],
+      "matchPackageNames": [
+        "terraform",
+        "hashicorp/aws",
+        "hashicorp/awscc",
+        "terraform-linters/tflint-ruleset-aws"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "automerge": true
     },
     {
       "description": "Disable digest pinning for terraform-docs (target file is not a Dockerfile)",
-      "matchPackageNames": ["quay.io/terraform-docs/terraform-docs"],
+      "matchPackageNames": [
+        "quay.io/terraform-docs/terraform-docs"
+      ],
       "pinDigests": false
     },
     {
       "description": "Automerge copier minor and patch updates",
-      "matchPackageNames": ["copier"],
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": [
+        "copier"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "automerge": true
     },
     {
       "description": "Group all mise tool updates into a single PR",
-      "matchManagers": ["custom.regex"],
+      "matchManagers": [
+        "custom.regex"
+      ],
       "matchPackageNames": [
         "node",
         "terraform-linters/tflint",
@@ -60,79 +94,117 @@
     },
     {
       "description": "Group GitHub Actions updates into a single PR",
-      "matchManagers": ["github-actions"],
+      "matchManagers": [
+        "github-actions"
+      ],
       "groupName": "github actions"
     }
   ],
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["/template/\\.mise\\.toml\\.jinja$/"],
-      "matchStrings": ["node = \"(?<currentValue>[^\"]+)\""],
+      "managerFilePatterns": [
+        "/template/\\.mise\\.toml\\.jinja$/"
+      ],
+      "matchStrings": [
+        "node = \"(?<currentValue>[^\"]+)\""
+      ],
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version",
       "versioningTemplate": "node"
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/template/\\.mise\\.toml\\.jinja$/"],
-      "matchStrings": ["tflint = \"(?<currentValue>[^\"]+)\""],
+      "managerFilePatterns": [
+        "/template/\\.mise\\.toml\\.jinja$/"
+      ],
+      "matchStrings": [
+        "tflint = \"(?<currentValue>[^\"]+)\""
+      ],
       "depNameTemplate": "terraform-linters/tflint",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver"
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/template/\\.mise\\.toml\\.jinja$/"],
-      "matchStrings": ["trivy = \"(?<currentValue>[^\"]+)\""],
+      "managerFilePatterns": [
+        "/template/\\.mise\\.toml\\.jinja$/"
+      ],
+      "matchStrings": [
+        "trivy = \"(?<currentValue>[^\"]+)\""
+      ],
       "depNameTemplate": "aquasecurity/trivy",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver"
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/template/\\.mise\\.toml\\.jinja$/"],
-      "matchStrings": ["terraform-docs = \"(?<currentValue>[^\"]+)\""],
+      "managerFilePatterns": [
+        "/template/\\.mise\\.toml\\.jinja$/"
+      ],
+      "matchStrings": [
+        "terraform-docs = \"(?<currentValue>[^\"]+)\""
+      ],
       "depNameTemplate": "quay.io/terraform-docs/terraform-docs",
       "datasourceTemplate": "docker",
       "versioningTemplate": "semver"
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/template/\\.mise\\.toml\\.jinja$/"],
-      "matchStrings": ["pre-commit = \"(?<currentValue>[^\"]+)\""],
+      "managerFilePatterns": [
+        "/template/\\.mise\\.toml\\.jinja$/"
+      ],
+      "matchStrings": [
+        "pre-commit = \"(?<currentValue>[^\"]+)\""
+      ],
       "depNameTemplate": "pre-commit",
       "datasourceTemplate": "pypi",
       "versioningTemplate": "semver"
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^copier\\.yml$/"],
-      "matchStrings": ["terraform_min_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""],
+      "managerFilePatterns": [
+        "/^copier\\.yml$/"
+      ],
+      "matchStrings": [
+        "terraform_min_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""
+      ],
       "depNameTemplate": "terraform",
       "datasourceTemplate": "hashicorp",
       "versioningTemplate": "semver"
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^copier\\.yml$/"],
-      "matchStrings": ["aws_provider_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""],
+      "managerFilePatterns": [
+        "/^copier\\.yml$/"
+      ],
+      "matchStrings": [
+        "aws_provider_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""
+      ],
       "depNameTemplate": "hashicorp/aws",
       "datasourceTemplate": "terraform-provider",
       "versioningTemplate": "hashicorp"
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^copier\\.yml$/"],
-      "matchStrings": ["awscc_provider_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""],
+      "managerFilePatterns": [
+        "/^copier\\.yml$/"
+      ],
+      "matchStrings": [
+        "awscc_provider_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""
+      ],
       "depNameTemplate": "hashicorp/awscc",
       "datasourceTemplate": "terraform-provider",
       "versioningTemplate": "hashicorp"
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/template/\\{%.*use_tflint.*%\\}\\.tflint\\.hcl\\{%.*%\\}\\.jinja$/"],
-      "matchStrings": ["plugin \"aws\" \\{[\\s\\S]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""],
+      "managerFilePatterns": [
+        "/template/\\{%.*use_tflint.*%\\}\\.tflint\\.hcl\\{%.*%\\}\\.jinja$/"
+      ],
+      "matchStrings": [
+        "plugin \"aws\" \\{[\\s\\S]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
       "depNameTemplate": "terraform-linters/tflint-ruleset-aws",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver"
