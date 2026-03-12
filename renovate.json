@@ -84,6 +84,7 @@
         "custom.regex"
       ],
       "matchPackageNames": [
+        "node",
         "terraform-linters/tflint",
         "aquasecurity/trivy",
         "quay.io/terraform-docs/terraform-docs",
@@ -100,6 +101,18 @@
     }
   ],
   "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/template/\\.mise\\.toml\\.jinja$/"
+      ],
+      "matchStrings": [
+        "node = \"(?<currentValue>[^\"]+)\""
+      ],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version",
+      "versioningTemplate": "node"
+    },
     {
       "customType": "regex",
       "managerFilePatterns": [
