@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/theopoc/tf-module-tpl/compare/v1.11.11...v1.12.0) (2026-03-12)
+
+
+### Features
+
+* make null provider version constraint as variable ([b9b8747](https://github.com/theopoc/tf-module-tpl/commit/b9b8747c3dc3db1865d837733d4e64fced9ea72d))
+
 ## [1.11.11](https://github.com/theopoc/tf-module-tpl/compare/v1.11.10...v1.11.11) (2026-03-12)
 
 ## [1.11.10](https://github.com/theopoc/tf-module-tpl/compare/v1.11.9...v1.11.10) (2026-03-12)
