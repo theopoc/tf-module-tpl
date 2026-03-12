@@ -19,8 +19,7 @@
     "labels": [
       "security"
     ],
-    "automerge": true,
-    "minimumReleaseAge": "7 days"
+    "automerge": true
   },
   "packageRules": [
     {
@@ -44,39 +43,11 @@
       "automerge": true
     },
     {
-      "description": "Automerge Terraform, providers, and tflint-ruleset-aws minor and patch updates when CI passes",
-      "matchManagers": [
-        "custom.regex"
-      ],
-      "matchPackageNames": [
-        "terraform",
-        "hashicorp/aws",
-        "hashicorp/awscc",
-        "terraform-linters/tflint-ruleset-aws"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "automerge": true
-    },
-    {
       "description": "Disable digest pinning for terraform-docs (target file is not a Dockerfile)",
       "matchPackageNames": [
         "quay.io/terraform-docs/terraform-docs"
       ],
       "pinDigests": false
-    },
-    {
-      "description": "Automerge copier minor and patch updates",
-      "matchPackageNames": [
-        "copier"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "automerge": true
     },
     {
       "description": "Group all mise tool updates into a single PR",
