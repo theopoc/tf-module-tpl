@@ -10,6 +10,7 @@
   "platformAutomerge": true,
   "automergeStrategy": "squash",
   "minimumReleaseAge": "7 days",
+  "schedule": ["at any time"],
   "prConcurrentLimit": 5,
   "labels": [
     "dependencies"
