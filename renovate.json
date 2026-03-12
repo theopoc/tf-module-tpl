@@ -50,6 +50,7 @@
       "description": "Group all mise tool updates into a single PR",
       "matchManagers": ["custom.regex"],
       "matchPackageNames": [
+        "node",
         "terraform-linters/tflint",
         "aquasecurity/trivy",
         "quay.io/terraform-docs/terraform-docs",
@@ -66,7 +67,15 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["template/\\.mise\\.toml\\.jinja$"],
+      "managerFilePatterns": ["/template/\\.mise\\.toml\\.jinja$/"],
+      "matchStrings": ["node = \"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version",
+      "versioningTemplate": "node"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/template/\\.mise\\.toml\\.jinja$/"],
       "matchStrings": ["tflint = \"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "terraform-linters/tflint",
       "datasourceTemplate": "github-releases",
@@ -74,7 +83,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["template/\\.mise\\.toml\\.jinja$"],
+      "managerFilePatterns": ["/template/\\.mise\\.toml\\.jinja$/"],
       "matchStrings": ["trivy = \"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "aquasecurity/trivy",
       "datasourceTemplate": "github-releases",
@@ -82,7 +91,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["template/\\.mise\\.toml\\.jinja$"],
+      "managerFilePatterns": ["/template/\\.mise\\.toml\\.jinja$/"],
       "matchStrings": ["terraform-docs = \"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "quay.io/terraform-docs/terraform-docs",
       "datasourceTemplate": "docker",
@@ -90,7 +99,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["template/\\.mise\\.toml\\.jinja$"],
+      "managerFilePatterns": ["/template/\\.mise\\.toml\\.jinja$/"],
       "matchStrings": ["pre-commit = \"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "pre-commit",
       "datasourceTemplate": "pypi",
@@ -98,7 +107,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^copier\\.yml$"],
+      "managerFilePatterns": ["/^copier\\.yml$/"],
       "matchStrings": ["terraform_min_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "terraform",
       "datasourceTemplate": "hashicorp",
@@ -106,7 +115,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^copier\\.yml$"],
+      "managerFilePatterns": ["/^copier\\.yml$/"],
       "matchStrings": ["aws_provider_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "hashicorp/aws",
       "datasourceTemplate": "terraform-provider",
@@ -114,7 +123,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^copier\\.yml$"],
+      "managerFilePatterns": ["/^copier\\.yml$/"],
       "matchStrings": ["awscc_provider_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "hashicorp/awscc",
       "datasourceTemplate": "terraform-provider",
@@ -122,7 +131,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["template/\\{%.*use_tflint.*%\\}\\.tflint\\.hcl\\{%.*%\\}\\.jinja$"],
+      "managerFilePatterns": ["/template/\\{%.*use_tflint.*%\\}\\.tflint\\.hcl\\{%.*%\\}\\.jinja$/"],
       "matchStrings": ["plugin \"aws\" \\{[\\s\\S]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "terraform-linters/tflint-ruleset-aws",
       "datasourceTemplate": "github-releases",
