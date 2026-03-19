@@ -35,7 +35,7 @@ module_description:
 
 terraform_min_version:
   type: str
-  default: "1.9.0"
+  default: "1.14.7"
   help: Minimum Terraform version required
 
 author_name:
