@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/theopoc/tf-module-tpl/compare/v1.13.0...v1.13.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **renovate:** use github-releases datasource for terraform binary ([#30](https://github.com/theopoc/tf-module-tpl/issues/30)) ([c8202f5](https://github.com/theopoc/tf-module-tpl/commit/c8202f53901b6ed785e2c7b11149ecbf047bd324))
+
 # [1.13.0](https://github.com/theopoc/tf-module-tpl/compare/v1.12.0...v1.13.0) (2026-03-12)
 
 
