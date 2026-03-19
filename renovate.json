@@ -141,9 +141,10 @@
       "matchStrings": [
         "terraform_min_version:[\\s\\S]*?default: \"(?<currentValue>[^\"]+)\""
       ],
-      "depNameTemplate": "terraform",
-      "datasourceTemplate": "hashicorp",
-      "versioningTemplate": "semver"
+      "depNameTemplate": "hashicorp/terraform",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "extractVersionTemplate": "^v?(?<version>.*)$"
     },
     {
       "customType": "regex",
