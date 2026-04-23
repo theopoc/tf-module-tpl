@@ -20,7 +20,7 @@ jobs:
       matrix:
         ci_provider: [github, gitlab]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           fetch-depth: 1
           persist-credentials: false
@@ -39,12 +39,12 @@ jobs:
             --data module_description="Example module" \
             --data author_name="Test Author" \
             --data ci_provider=${{ matrix.ci_provider }} \
-      - uses: jdx/mise-action@v3
+      - uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3
         with:
           working_directory: /tmp/mise-render
           cache: true
       - name: Cache npm dependencies
-        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('template/*package.json*.jinja', 'package-lock.json') }}
@@ -64,7 +64,7 @@ jobs:
             --data author_name="Test Author" \
             --data ci_provider=${{ matrix.ci_provider }} \
       - name: Upload rendered artifact
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: rendered-${{ matrix.ci_provider }}
           path: /tmp/rendered
@@ -80,7 +80,7 @@ jobs:
         ci_provider: [github, gitlab]
     steps:
       - name: Download rendered artifact
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: rendered-${{ matrix.ci_provider }}
           path: /tmp/rendered
@@ -110,7 +110,7 @@ jobs:
 
       - name: Cache npm dependencies
         if: matrix.ci_provider == 'gitlab'
-        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('template/*package.json*.jinja', 'package-lock.json') }}
