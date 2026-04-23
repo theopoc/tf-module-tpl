@@ -24,7 +24,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
-      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
           enable-cache: true
       - name: Install dependencies
@@ -39,7 +39,7 @@ jobs:
             --data module_description="Example module" \
             --data author_name="Test Author" \
             --data ci_provider=${{ matrix.ci_provider }} \
-      - uses: jdx/mise-action@v3
+      - uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4
         with:
           working_directory: /tmp/mise-render
           cache: true
