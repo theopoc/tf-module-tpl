@@ -1,3 +1,10 @@
+## [1.13.9](https://github.com/theopoc/tf-module-tpl/compare/v1.13.8...v1.13.9) (2026-08-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency copier to v9.15.2 [security] ([#42](https://github.com/theopoc/tf-module-tpl/issues/42)) ([b4fb731](https://github.com/theopoc/tf-module-tpl/commit/b4fb731c3f106323e690b6e4e8fd74e0c5d94a5c))
+
 ## [1.13.8](https://github.com/theopoc/tf-module-tpl/compare/v1.13.7...v1.13.8) (2026-04-11)
 
 ## [1.13.7](https://github.com/theopoc/tf-module-tpl/compare/v1.13.6...v1.13.7) (2026-04-07)
