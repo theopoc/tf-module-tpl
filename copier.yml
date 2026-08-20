@@ -68,7 +68,7 @@ providers:
 
 aws_provider_version:
   type: str
-  default: "~> 5.0"
+  default: "~> 6.0"
   help: AWS provider version constraint
   when: "{{ 'aws' in providers }}"
 
