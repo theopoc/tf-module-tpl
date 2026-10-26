@@ -1,0 +1,43 @@
+name: Renovate approval notification
+
+on:
+  pull_request:
+    # Initial labels also emit labeled events; avoid duplicate opened notifications.
+    types: [labeled, reopened, ready_for_review]
+
+permissions: {}
+
+jobs:
+  notify:
+    if: >-
+      ${{ github.event.pull_request.user.login == 'renovate[bot]' &&
+          github.event.pull_request.head.repo.full_name == github.repository &&
+          github.event.pull_request.state == 'open' &&
+          !github.event.pull_request.draft &&
+          contains(github.event.pull_request.labels.*.name, 'manual-approval') &&
+          (github.event.action != 'labeled' || github.event.label.name == 'manual-approval') }}
+    runs-on: ubuntu-24.04
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      PR_TITLE: ${{ github.event.pull_request.title }}
+      PR_URL: ${{ github.event.pull_request.html_url }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+    steps:
+      - name: Check Telegram configuration
+        run: |
+          if [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]]; then
+            echo "::error::Configure TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID repository secrets"
+            exit 1
+          fi
+      - name: Send approval notification
+        run: |
+          message=$(printf 'Renovate : approbation requise\n\nDépôt : %s\nPR #%s : %s\n\nMise à jour majeure : vérifier et fusionner manuellement après validation de la CI.\n\n%s' \
+            "$GITHUB_REPOSITORY" "$PR_NUMBER" "$PR_TITLE" "$PR_URL")
+          response=$(curl --silent --show-error --fail-with-body \
+            --connect-timeout 10 --max-time 30 \
+            --request POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=${message}" \
+            --data-urlencode 'disable_web_page_preview=true')
+          jq -e '.ok == true' <<< "$response" > /dev/null
