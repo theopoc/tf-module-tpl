@@ -64,7 +64,7 @@ jobs:
             --data author_name="Test Author" \
             --data ci_provider=${{ matrix.ci_provider }} \
       - name: Upload rendered artifact
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: rendered-${{ matrix.ci_provider }}
           path: /tmp/rendered
@@ -80,7 +80,7 @@ jobs:
         ci_provider: [github, gitlab]
     steps:
       - name: Download rendered artifact
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
         with:
           name: rendered-${{ matrix.ci_provider }}
           path: /tmp/rendered
