@@ -8,7 +8,9 @@
   "semanticCommitScope": "deps",
   "dependencyDashboard": true,
   "platformAutomerge": true,
+  "automergeType": "pr",
   "automergeStrategy": "squash",
+  "separateMajorMinor": true,
   "minimumReleaseAge": "7 days",
   "schedule": ["at any time"],
   "prConcurrentLimit": 5,
@@ -19,8 +21,7 @@
   "vulnerabilityAlerts": {
     "labels": [
       "security"
-    ],
-    "automerge": true
+    ]
   },
   "packageRules": [
     {
@@ -31,17 +32,23 @@
       "enabled": false
     },
     {
-      "description": "Automerge minor and patch updates for tracked managers when CI passes",
-      "matchManagers": [
-        "custom.regex",
-        "github-actions",
-        "uv"
-      ],
+      "description": "Automerge non-major updates when required CI checks pass",
       "matchUpdateTypes": [
         "minor",
-        "patch"
+        "patch",
+        "pin",
+        "pinDigest",
+        "digest",
+        "lockFileMaintenance"
       ],
       "automerge": true
+    },
+    {
+      "description": "Request manual review and notify only for major updates",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "addLabels": ["manual-approval"],
+      "reviewers": ["theopoc"]
     },
     {
       "description": "Disable digest pinning for terraform-docs (target file is not a Dockerfile)",
