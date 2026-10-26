@@ -4,7 +4,7 @@ node = "25.9.0"
 {%- endif %}
 terraform = "{{ terraform_min_version }}"
 {%- if use_trivy %}
-trivy = "0.75.0"
+trivy = "0.76.0"
 {%- endif %}
 {%- if use_tflint %}
 tflint = "0.64.0"
@@ -13,7 +13,7 @@ tflint = "0.64.0"
 terraform-docs = "0.20.0"
 {%- endif %}
 {%- if use_pre_commit %}
-pre-commit = "4.6.2"
+pre-commit = "4.7.0"
 {%- endif %}
 
 [tasks.validate]
