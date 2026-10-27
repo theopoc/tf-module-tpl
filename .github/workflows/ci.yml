@@ -31,17 +31,19 @@ jobs:
         run: uv sync --frozen
       - name: Render template for mise cache
         run: |
-          uv run copier copy . /tmp/mise-render \
+          uv run copier copy . "$GITHUB_WORKSPACE/mise-render" \
             --defaults \
             --trust \
             --skip-tasks \
+            --exclude '*' \
+            --exclude '!.mise.toml' \
             --data module_name=terraform-aws-example \
             --data module_description="Example module" \
             --data author_name="Test Author" \
             --data ci_provider=${{ matrix.ci_provider }} \
       - uses: jdx/mise-action@fc42bcc7ddbf51124c30f95a877a0c5168a3bfde # v5
         with:
-          working_directory: /tmp/mise-render
+          working_directory: ${{ github.workspace }}/mise-render
           cache: true
       - name: Cache npm dependencies
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
@@ -104,18 +106,16 @@ jobs:
             --no-cache-server \
             --artifact-server-path /tmp/act-artifacts
 
-      - name: Install gitlab-ci-local
-        if: matrix.ci_provider == 'gitlab'
-        run: npm install -g gitlab-ci-local
-
       - name: Cache npm dependencies
         if: matrix.ci_provider == 'gitlab'
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('template/*package.json*.jinja', 'package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+          key: ${{ runner.os }}-npm-gitlab-ci-local-v1
+
+      - name: Install gitlab-ci-local
+        if: matrix.ci_provider == 'gitlab'
+        run: npm install -g gitlab-ci-local
 
       - name: Preview with gitlab-ci-local
         if: matrix.ci_provider == 'gitlab'
