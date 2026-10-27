@@ -1,3 +1,10 @@
+## [1.13.26](https://github.com/theopoc/tf-module-tpl/compare/v1.13.25...v1.13.26) (2026-10-27)
+
+
+### Bug Fixes
+
+* use mise tools in Copier tasks ([2c7ffa5](https://github.com/theopoc/tf-module-tpl/commit/2c7ffa5d4d58de7d53d48ad1181a8eea4b7d0f13))
+
 ## [1.13.25](https://github.com/theopoc/tf-module-tpl/compare/v1.13.24...v1.13.25) (2026-10-27)
 
 ## [1.13.24](https://github.com/theopoc/tf-module-tpl/compare/v1.13.23...v1.13.24) (2026-10-26)
