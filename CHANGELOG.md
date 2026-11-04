@@ -1,3 +1,5 @@
+## [1.13.34](https://github.com/theopoc/tf-module-tpl/compare/v1.13.33...v1.13.34) (2026-11-04)
+
 ## [1.13.33](https://github.com/theopoc/tf-module-tpl/compare/v1.13.32...v1.13.33) (2026-11-02)
 
 ## [1.13.32](https://github.com/theopoc/tf-module-tpl/compare/v1.13.31...v1.13.32) (2026-10-30)
