@@ -6,7 +6,9 @@
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",
-  "dependencyDashboard": true,
+  "dependencyDashboard": {
+    "enabled": true
+  },
   "platformAutomerge": true,
   "automergeType": "pr",
   "automergeStrategy": "squash",
